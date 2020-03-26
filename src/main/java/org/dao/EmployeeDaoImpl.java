@@ -1,4 +1,4 @@
 package org.dao;
 
-public class EmployeeDaoImpl {
+public class EmployeeDaoImpl{
 }
