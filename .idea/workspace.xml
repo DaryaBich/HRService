@@ -4,15 +4,6 @@
     <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/PositionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/PositionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/PositionDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/PositionDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/startApplication/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/ApplicationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/startApplication/ApplicationFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/view/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,12 +74,26 @@
       <workItem from="1585243551441" duration="627000" />
       <workItem from="1585244564110" duration="314000" />
       <workItem from="1585297023885" duration="9000" />
-      <workItem from="1585309139611" duration="6966000" />
+      <workItem from="1585309139611" duration="7035000" />
+      <workItem from="1585412127309" duration="7000" />
+      <workItem from="1585416090712" duration="260000" />
     </task>
+    <task id="LOCAL-00001" summary="add controllerCommands">
+      <created>1585317349177</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585317349177</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add controllerCommands" />
+    <option name="LAST_COMMIT_MESSAGE" value="add controllerCommands" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="74" key="#Plugins" timestamp="1585222141639">
@@ -99,18 +104,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="958" y="134" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1585314345025" />
+    <state x="406" y="11" key="CommitChangelistDialog2" timestamp="1585317347641">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="406" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585317347641" />
     <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1585224782420">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585224782420" />
-    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1585317283124">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1585317369699">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585317283124" />
-    <state x="477" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1585297029355">
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585317369699" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1585317369699">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="477" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585297029355" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585317369699" />
+    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1585317369698">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585317369698" />
+    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1585317369699">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585317369699" />
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1585317355477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585317355477" />
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1585412127536">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585412127536" />
     <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1585224145436">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

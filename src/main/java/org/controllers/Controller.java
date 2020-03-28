@@ -35,7 +35,7 @@ public class Controller {
     }
     public void addShow() {
         // employee
-        controllerCommands.put("show all employees", "showEmpAll");
+        controllerCommands.put("show all employees:", "showEmpAll");
         controllerCommands.put("show employee: id =", "showEmpId");
         controllerCommands.put("show employee: name =", "showEmpName");
         controllerCommands.put("show employee: id department =", "showEmpDep");
@@ -43,12 +43,12 @@ public class Controller {
         controllerCommands.put("show employee: seniority =", "showEmpSen");
         controllerCommands.put("show employee: id position =", "showEmpPos");
         // department
-        controllerCommands.put("show all departments", "showDepAll");
+        controllerCommands.put("show all departments =", "showDepAll");
         controllerCommands.put("show department: id =", "showDepId");
         controllerCommands.put("show department: name =", "showDepName");
         controllerCommands.put("show department: id chief =", "showDepIdChief");
         // position
-        controllerCommands.put("show all positions", "showPosAll");
+        controllerCommands.put("show all positions =", "showPosAll");
         controllerCommands.put("show position: id =", "showPosId");
         controllerCommands.put("show position: name =", "showPosName");
         controllerCommands.put("show position: salary =", "showPosSal");
