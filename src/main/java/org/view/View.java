@@ -14,4 +14,10 @@ public class View {
         System.out.println("Инструкция по работе с приложением");
         in.close();
     }
+    public void inputData(){
+        System.out.println("Введите команду:\n");
+    }
+    public void oops(){
+        System.out.println("Похожу такая команда отсутствует, попробуйте еще!\n");
+    }
 }

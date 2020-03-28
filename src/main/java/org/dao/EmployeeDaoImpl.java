@@ -5,10 +5,12 @@ import org.entities.Employee;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-
+private List<Employee> employees;
+    // add
     public List<Employee> addEmployee(Employee employee) {
         return null;
     }
+    //remove
 
     public List<Employee> removeAll() {
         return null;
@@ -37,6 +39,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> removeByPositionId(int positionId) {
         return null;
     }
+    //update
 
     public List<Employee> updateId(int id, Employee... employees) {
         return null;
@@ -61,13 +64,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> updatePositionId(int positionId, Employee... employees) {
         return null;
     }
+    //show
 
     public Employee showById(int id) {
         return null;
     }
 
     public List<Employee> showAll() {
-        return null;
+
+        return employees;
     }
 
     public List<Employee> showByName(String FIO) {
@@ -89,6 +94,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByPositionId(int positionId) {
         return null;
     }
+    // get template
 
     public Employee getByIdTemplate(String id) {
         return null;
