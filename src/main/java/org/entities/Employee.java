@@ -6,7 +6,7 @@ public class Employee {
     private int idDepartment;
     private String phoneNumber;
     private int seniority;
-    private int positionId;
+    private int idPosition;
 
     public Employee(int id, String FIO, int idDepartment,
                     String phoneNumber, int seniority, int position) {
@@ -15,18 +15,18 @@ public class Employee {
         this.idDepartment = idDepartment;
         this.phoneNumber = phoneNumber;
         this.seniority = seniority;
-        positionId = position;
+        this.idPosition = position;
     }
 
     @Override
     public String toString() {
-        return "Сотрудник\n" +
-                "id = " + id +
-                "\n" + FIO +
-                "\nDepartment = " + idDepartment +
-                "\nPhone = " + phoneNumber + '\'' +
-                "\nSeniority =" + seniority +
-                "\nPosition=" + positionId +
-                '}';
+        return "Employee: " +
+                FIO +
+                " | id = " + id +
+                " | Department = " + idDepartment +
+                " | Phone = " + phoneNumber + '\'' +
+                " | Seniority =" + seniority +
+                " | Position=" + idPosition +
+                '\n';
     }
 }

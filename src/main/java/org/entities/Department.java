@@ -10,4 +10,13 @@ public class Department {
         this.name = name;
         this.chiefIdEmployee = chiefIdEmployee;
     }
+
+    @Override
+    public String toString() {
+        return "Department: " +
+                "id = " + id +
+                " | name = " + name +
+                " | chief Id = " + chiefIdEmployee +
+                '\n';
+    }
 }

@@ -10,4 +10,13 @@ public class Position {
         this.name = name;
         this.salary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "Position: " +
+                " id = " + id +
+                " | name='" + name + '\'' +
+                " | salary=" + salary +
+                '\n';
+    }
 }

@@ -6,13 +6,14 @@ import java.util.List;
 
 public interface DepartmentDao {
     // add
-    List<Department> addDepartment(Department department);
+    List<Department> addDepartment(String name, int chiefIdEmployee);
     // remove
    List<Department> removeAll();
    List<Department> removeById(int id);
    List<Department> removeByName(String name);
    List<Department> removeByChiefId(int chiefId);
     // update
+    List<Department> updateAll();
    List<Department> updateId(int id, Department... departments);
    List<Department> updateName(String name, Department... departments);
    List<Department> updateChiefId(int chiefId, Department... departments);

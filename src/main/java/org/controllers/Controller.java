@@ -1,4 +1,5 @@
 package org.controllers;
+
 import org.dao.DepartmentDao;
 import org.dao.EmployeeDao;
 import org.dao.PositionDao;
@@ -7,6 +8,7 @@ import org.entities.Employee;
 import org.entities.Position;
 import org.view.View;
 
+import javax.print.DocFlavor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +18,11 @@ public class Controller {
     EmployeeDao employeeDao;
     DepartmentDao departmentDao;
     PositionDao positionDao;
+
     static {
         (new View()).welcome();
     }
+
     public Controller() {
         addShow();
         addPut();
@@ -28,44 +32,293 @@ public class Controller {
     }
 
     public String parsing(String inputCommand) {
-        String result = new String();
+        String result = "";
         String command;
         // если вся строка - запрос без аргументов
-        if (controllerCommands.containsKey(inputCommand)){
-            command = controllerCommands.get(inputCommand);
-            if ("showAllEmp".equals(command)) {
-                List<Employee> employees = employeeDao.showAll();
-            } else if ("showAllDep".equals(command)) {
-                List<Department> departments = departmentDao.showAll();
-            } else if ("showAllPos".equals(command)) {
-                List<Position> positions = positionDao.showAll();
-            } else if ("remAllEmp".equals(command)) {
-            } else if ("remAllDep".equals(command)) {
-            } else if ("remAllPos".equals(command)) {
-            } else if ("updAllEmp".equals(command)) {
-            } else if ("updAllDep".equals(command)) {
-            } else if ("updAllPos".equals(command)) {
-            }
-        }
-        else {
+        if (controllerCommands.containsKey(inputCommand)) {
+            result = switchAllStringCommand(controllerCommands.get(inputCommand));
+        } else {
             command = inputCommand.substring(0, inputCommand.indexOf("=") + 1);
-            if (controllerCommands.containsKey(command)){
-
+            String[] arguments = inputCommand.substring(inputCommand.indexOf("=") + 1)
+                    .split(",");
+            for (String arg:arguments) {
+                arg.trim();
             }
-            else {
+            if (controllerCommands.containsKey(command)) {
+                result = switchCommand(command, arguments);
+            } else {
                 return "didn`t search"; // если запрос не найден
             }
         }
-
-//        if (s == "emplAll") {
-//            List<Employee> all = emploerDao.getAll();
-//        }
-        return result;//.toString();
+        return result;
     }
-    private String parser(String command){
+
+    private String switchAllStringCommand(String command) {
+        switch (command) {
+            case ("showAllDep"):
+                return listDepartmentsToString(departmentDao.showAll());
+            case ("showAllEmp"):
+                return listEmployeesToString(employeeDao.showAll());
+            case ("showAllPos"):
+                return listPositionsToString(positionDao.showAll());
+            case ("remAllEmp"):
+                return "Empty list of Employees";
+            case ("remAllDep"):
+                return "Empty list of Departments";
+            case ("remAllPos"):
+                return "Empty list of Positions";
+            case ("updAllEmp"):
+                return listEmployeesToString(employeeDao.updateAll());
+            case ("updAllDep"):
+                return listDepartmentsToString(departmentDao.updateAll());
+            case ("updAllPos"):
+                return listPositionsToString(positionDao.updateAll());
+            default:
+                return "No result";
+        }
+    }
+
+    private String switchCommand(String command, String[] arguments) {
+        String result;
+        switch (command) {
+            case ("showEmpId"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    (employeeDao.showById(Integer.parseInt(arguments[0]))).toString();
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showEmpName"):
+                if (arguments.length == 1){
+                    return listEmployeesToString(employeeDao.showByName(arguments[0]));
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("showEmpDep"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return listEmployeesToString(employeeDao.showByDepartment(Integer.parseInt(arguments[0])));
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showEmpPhone"):
+                if (arguments.length == 1){
+                    return listEmployeesToString(employeeDao.showByPhoneNumber(arguments[0]));
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("showEmpSen"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return listEmployeesToString(employeeDao.showBySeniority(Integer.parseInt(arguments[0])));
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showEmpPos"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return listEmployeesToString(employeeDao.showByPositionId(Integer.parseInt(arguments[0])));
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showDepId"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return (departmentDao.showById(Integer.parseInt(arguments[0]))).toString();
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showDepName"):
+                if (arguments.length == 1){
+                    return listDepartmentsToString(departmentDao.showByName(arguments[0]));
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("showDepIdChief"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return (departmentDao.showByChiefId(Integer.parseInt(arguments[0]))).toString();
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showPosId"):
+                try {
+                    Integer.parseInt(arguments[0]);
+                    return (positionDao.showById(Integer.parseInt(arguments[0]))).toString();
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("showPosName"):
+                if (arguments.length == 1){
+                    return listPositionsToString(positionDao.showByName(arguments[0]));
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("showPosSal"):
+                try {
+                    double res = Double.parseDouble(arguments[0]);
+                    return  listPositionsToString(positionDao.showBySalary(res));
+                } catch (NumberFormatException e) {
+                    return "id not a digit!";
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return "not enough arguments!";
+                }
+            case ("addEmp"):
+                if (arguments.length == 5){
+                    try{
+                        int idDep = Integer.parseInt(arguments[1]);
+                        int seniority = Integer.parseInt(arguments[3]);
+                        int idPos = Integer.parseInt(arguments[4]);
+                        return listEmployeesToString(employeeDao.addEmployee(arguments[0],
+                                idDep, arguments[2], seniority, idPos));
+                    } catch(NumberFormatException e){
+                        return "incorrect data or incorrect order!";
+                    }
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("addDep"):
+                if (arguments.length == 2){
+                    try{
+                        int idChief = Integer.parseInt(arguments[1]);
+                        return listDepartmentsToString(departmentDao.addDepartment(arguments[0], idChief));
+                    } catch(NumberFormatException e){
+                        return "incorrect data or incorrect order!";
+                    }
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("addPos"):
+                if (arguments.length == 2){
+                    try{
+                        double salary = Double.parseDouble(arguments[1]);
+                        return listPositionsToString(positionDao.addPosition(arguments[0], salary));
+                    } catch(NumberFormatException e){
+                        return "incorrect data or incorrect order!";
+                    }
+                }
+                else {
+                    return "not enough/too much arguments!";
+                }
+            case ("remEmpId"):
+                return "res";
+            case ("remEmpName"):
+                return "res";
+            case ("remEmpDep"):
+                return "res";
+            case ("remEmpPhone"):
+                return "res";
+            case ("remEmpSen"):
+                return "res";
+            case ("remEmpPos"):
+                return "res";
+            case ("remDepId"):
+                return "res";
+            case ("remDepName"):
+                return "res";
+            case ("remDepIdChief"):
+                return "res";
+            case ("remPosId"):
+                return "res";
+            case ("remPosName"):
+                return "res";
+            case ("remPosSal"):
+                return "res";
+            case ("updEmpId"):
+                return "res";
+            case ("updEmpName"):
+                return "res";
+            case ("updEmpDep"):
+                return "res";
+            case ("updEmpPhone"):
+                return "res";
+            case ("updEmpSen"):
+                return "res";
+            case ("updEmpPos"):
+                return "res";
+            case ("updDepId"):
+                return "res";
+            case ("updDepName"):
+                return "res";
+            case ("updDepIdChief"):
+                return "res";
+            case ("updPosId"):
+                return "res";
+            case ("updPosName"):
+                return "res";
+            case ("updPosSal"):
+                return "res";
+            case ("getEmpNameTemp"):
+                return "res";
+            case ("getEmpDepTemp"):
+                return "res";
+            case ("getEmpPhoneTemp"):
+                return "res";
+            case ("getEmpSenTemp"):
+                return "res";
+            case ("getEmpPosTemp"):
+                return "res";
+            case ("getDepIdTemp"):
+                return "res";
+            case ("getDepNameTemp"):
+                return "res";
+            case ("getDepIdChiefTemp"):
+                return "res";
+            case ("getPosIdTemp"):
+                return "res";
+            case ("getPosNameTemp"):
+                return "res";
+            case ("getPosSalTemp"):
+                return "res";
+        }
+        return "res";
+    }
+private String listEmployeesToString(List<Employee> employees){
+        StringBuilder sBEmployee = new StringBuilder();
+    for (Employee empl:employees) {
+        sBEmployee.append(empl.toString());
+    }
+   return sBEmployee.toString();
+}
+    private String listDepartmentsToString(List<Department> departments){
+        StringBuilder sBDepartment = new StringBuilder();
+        for (Department dep : departments) {
+            sBDepartment.append(dep.toString());
+        }
+        return sBDepartment.toString();
+    }
+    private String listPositionsToString(List<Position> positions){
+        StringBuilder sBPosition = new StringBuilder();
+        for (Position pos : positions) {
+            sBPosition.append(pos.toString());
+        }
+        return sBPosition.toString();
+    }
+    private String parser(String command) {
         StringBuilder sB = new StringBuilder();
         return command;
     }
+
     public void addShow() {
         // employee
         controllerCommands.put("show all employees", "showAllEmp");

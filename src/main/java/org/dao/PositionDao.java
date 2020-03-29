@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PositionDao {
     // add
-    List<Position> addPosition(Position position);
+    List<Position> addPosition(String name, double salary);
 
     // remove
     List<Position> removeAll();
@@ -18,6 +18,7 @@ public interface PositionDao {
     List<Position> removeBySalary(double salary);
 
     // update
+    List<Position> updateAll();
     List<Position> updateId(int id, Position... positions);
 
     List<Position> updateName(String name, Position... positions);

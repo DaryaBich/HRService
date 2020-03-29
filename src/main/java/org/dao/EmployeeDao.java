@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface EmployeeDao {
     // add
-    List<Employee> addEmployee(Employee employee);
+    List<Employee> addEmployee(String FIO, int idDepartment,
+                               String phoneNumber, int seniority, int position);
 
     // remove
     List<Employee> removeAll();
@@ -24,6 +25,7 @@ public interface EmployeeDao {
     List<Employee> removeByPositionId(int positionId);
 
     // update
+    List<Employee> updateAll ();
     List<Employee> updateId(int id, Employee... employees);
 
     List<Employee> updateName(String FIO, Employee... employees);
