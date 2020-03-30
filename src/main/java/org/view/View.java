@@ -1,23 +1,26 @@
 package org.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
-    private Scanner in;
-    public void welcome(){
-        in = new Scanner(System.in);
+    public static void welcome(){
         System.out.println("Приветствие");
-        in.close();
     }
-    public void instruction(){
-        in = new Scanner(System.in);
+    public static void instruction(){
         System.out.println("Инструкция по работе с приложением");
-        in.close();
     }
-    public void inputData(){
+    public static void inputData(){
         System.out.println("Введите команду:\n");
     }
-    public void oops(){
-        System.out.println("Похожу такая команда отсутствует, попробуйте еще!\n");
+    public static void oops(){
+        System.out.println("Похожe такая команда отсутствует, попробуйте еще!\n");
+    }
+    public static String[] inputUpdateArguments(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите поля для изменения в формате: поле1=значение1,поле2=значение2");
+        String[] inputString = in.nextLine().split(",");
+        in.close();
+        return inputString;
     }
 }

@@ -6,24 +6,22 @@ import java.util.List;
 
 public interface DepartmentDao {
     // add
-    List<Department> addDepartment(String name, int chiefIdEmployee);
+    boolean addDepartment(String name, int chiefIdEmployee);
     // remove
-   List<Department> removeAll();
-   List<Department> removeById(int id);
-   List<Department> removeByName(String name);
-   List<Department> removeByChiefId(int chiefId);
+    void removeAll();
+    boolean removeById(int id);
+    boolean removeByName(String name);
+    boolean removeByChiefId(int chiefId);
     // update
-    List<Department> updateAll();
-   List<Department> updateId(int id, Department... departments);
-   List<Department> updateName(String name, Department... departments);
-   List<Department> updateChiefId(int chiefId, Department... departments);
+   String updateName(String name);
+   String updateChiefId(int chiefId);
     // show
    Department showById(int id);
    List<Department> showAll();
    List<Department> showByName(String name);
    List<Department> showByChiefId(int chiefId);
     // get by template
-    List<Department> showByIdTemplate(int id);
+    List<Department> showByIdTemplate(String id);
     List<Department> showByNameTemplate(String name);
-    List<Department> showByChiefIdTemplate(int chiefId);
+    List<Department> showByChiefIdTemplate(String chiefId);
 }

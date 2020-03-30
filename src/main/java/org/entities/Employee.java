@@ -1,5 +1,7 @@
 package org.entities;
 
+import java.util.Objects;
+
 public class Employee {
     private int id;
     private String FIO;
@@ -28,5 +30,66 @@ public class Employee {
                 " | Seniority =" + seniority +
                 " | Position=" + idPosition +
                 '\n';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return idDepartment == employee.idDepartment &&
+                seniority == employee.seniority &&
+                idPosition == employee.idPosition &&
+                Objects.equals(FIO, employee.FIO) &&
+                Objects.equals(phoneNumber, employee.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(FIO, idDepartment, phoneNumber, seniority, idPosition);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getFIO() {
+        return FIO;
+    }
+
+    public void setFIO(String FIO) {
+        this.FIO = FIO;
+    }
+
+    public int getIdDepartment() {
+        return idDepartment;
+    }
+
+    public void setIdDepartment(int idDepartment) {
+        this.idDepartment = idDepartment;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getSeniority() {
+        return seniority;
+    }
+
+    public void setSeniority(int seniority) {
+        this.seniority = seniority;
+    }
+
+    public int getIdPosition() {
+        return idPosition;
+    }
+
+    public void setIdPosition(int idPosition) {
+        this.idPosition = idPosition;
     }
 }

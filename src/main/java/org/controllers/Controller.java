@@ -69,8 +69,8 @@ public class Controller {
                 return "Empty list of Positions";
             case ("updAllEmp"):
                 return listEmployeesToString(employeeDao.updateAll());
-            case ("updAllDep"):
-                return listDepartmentsToString(departmentDao.updateAll());
+//            case ("updAllDep"):
+//                return listDepartmentsToString(departmentDao.updateAll());
             case ("updAllPos"):
                 return listPositionsToString(positionDao.updateAll());
             default:
@@ -196,18 +196,18 @@ public class Controller {
                 else {
                     return "not enough/too much arguments!";
                 }
-            case ("addDep"):
-                if (arguments.length == 2){
-                    try{
-                        int idChief = Integer.parseInt(arguments[1]);
-                        return listDepartmentsToString(departmentDao.addDepartment(arguments[0], idChief));
-                    } catch(NumberFormatException e){
-                        return "incorrect data or incorrect order!";
-                    }
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
+//            case ("addDep"):
+//                if (arguments.length == 2){
+//                    try{
+//                        int idChief = Integer.parseInt(arguments[1]);
+//                        return listDepartmentsToString(departmentDao.addDepartment(arguments[0], idChief));
+//                    } catch(NumberFormatException e){
+//                        return "incorrect data or incorrect order!";
+//                    }
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
             case ("addPos"):
                 if (arguments.length == 2){
                     try{
@@ -313,10 +313,6 @@ private String listEmployeesToString(List<Employee> employees){
             sBPosition.append(pos.toString());
         }
         return sBPosition.toString();
-    }
-    private String parser(String command) {
-        StringBuilder sB = new StringBuilder();
-        return command;
     }
 
     public void addShow() {

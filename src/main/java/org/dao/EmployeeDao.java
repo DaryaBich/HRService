@@ -6,37 +6,35 @@ import java.util.List;
 
 public interface EmployeeDao {
     // add
-    List<Employee> addEmployee(String FIO, int idDepartment,
+    boolean addEmployee(String FIO, int idDepartment,
                                String phoneNumber, int seniority, int position);
 
     // remove
-    List<Employee> removeAll();
+    void removeAll();
 
-    List<Employee> removeById(int id);
+    boolean removeById(int id);
 
-    List<Employee> removeByName(String Name);
+    boolean removeByName(String Name);
 
-    List<Employee> removeByDepartmentId(int idDepartment);
+    boolean removeByDepartmentId(int idDepartment);
 
-    List<Employee> removeByPhoneNumber(String phoneNumber);
+    boolean removeByPhoneNumber(String phoneNumber);
 
-    List<Employee> removeBySeniority(int seniority);
+    boolean removeBySeniority(int seniority);
 
-    List<Employee> removeByPositionId(int positionId);
+    boolean removeByPositionId(int positionId);
 
     // update
-    List<Employee> updateAll ();
-    List<Employee> updateId(int id, Employee... employees);
 
-    List<Employee> updateName(String FIO, Employee... employees);
+    String updateName(String FIO, Employee... employees);
 
-    List<Employee> updateDepartment(int idDepartment, Employee... employees);
+    String updateDepartment(int idDepartment, Employee... employees);
 
-    List<Employee> updatePhoneNumber(String phoneNumber, Employee... employees);
+    String updatePhoneNumber(String phoneNumber, Employee... employees);
 
-    List<Employee> updateSeniority(int seniority, Employee... employees);
+    String updateSeniority(int seniority, Employee... employees);
 
-    List<Employee> updatePositionId(int positionId, Employee... employees);
+    String updatePositionId(int positionId, Employee... employees);
 
     // show
     Employee showById(int id);
@@ -54,17 +52,16 @@ public interface EmployeeDao {
     List<Employee> showByPositionId(int positionId);
 
     // get by template
-    Employee getByIdTemplate(String id);
+    List<Employee> showByIdTemplate(String id);
 
-    List<Employee> getAllTemplate();
 
-    List<Employee> getByNameTemplate(String FIO);
+    List<Employee> showByNameTemplate(String FIO);
 
-    List<Employee> getByDepartmentTemplate(String idDepartment);
+    List<Employee> showByDepartmentTemplate(String idDepartment);
 
-    List<Employee> getByPhoneNumberTemplate(String phoneNumber);
+    List<Employee> showByPhoneNumberTemplate(String phoneNumber);
 
-    List<Employee> getBySeniorityTemplate(String seniority);
+    List<Employee> showBySeniorityTemplate(String seniority);
 
-    List<Employee> getByPositionIdTemplate(String positionId);
+    List<Employee> showByPositionIdTemplate(String positionId);
 }

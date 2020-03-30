@@ -1,14 +1,16 @@
 package org.entities;
 
+import java.util.Objects;
+
 public class Department {
     private int id;
     private String name;
-    private int chiefIdEmployee;
+    private int chiefId;
 
     public Department(int id, String name, int chiefIdEmployee) {
         this.id = id;
         this.name = name;
-        this.chiefIdEmployee = chiefIdEmployee;
+        this.chiefId = chiefIdEmployee;
     }
 
     @Override
@@ -16,7 +18,41 @@ public class Department {
         return "Department: " +
                 "id = " + id +
                 " | name = " + name +
-                " | chief Id = " + chiefIdEmployee +
+                " | chief Id = " + chiefId +
                 '\n';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return chiefId == that.chiefId&&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, chiefId);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getChiefIdEmployee() {
+        return chiefId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setChiefIdEmployee(int chiefIdEmployee) {
+        this.chiefId = chiefIdEmployee;
     }
 }
