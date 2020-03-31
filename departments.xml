@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<department xmlns="C:\Users\Darya\Desktop\Java\HRApp\departments.xml">
+<department>
+<id>1</id>
+<name>hrs</name>
+<chiefId>5</chiefId>
+</department>
+<department>
+<id>1</id>
+<name>hrs</name>
+<chiefId>5</chiefId>
+</department>
+<department>
+<id>3</id>
+<name>he</name>
+<chiefId>4</chiefId>
+</department>
+<department>
+<id>4</id>
+<name>this</name>
+<chiefId>3</chiefId>
+</department>
+</department>

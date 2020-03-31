@@ -56,4 +56,11 @@ public class Position {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Position() {
+    }
 }

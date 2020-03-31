@@ -1,13 +1,11 @@
 package org.dao;
 
 import org.entities.Department;
-import org.entities.Employee;
 import org.utils.XmlUtilsDataExtractor;
 import org.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -62,7 +60,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public boolean removeByChiefId(int chiefId) {
         List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
         int count = departments.size();
-        departments = removeDepartment(departments, (dep) -> dep.getChiefIdEmployee() == chiefId);
+        departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
             XmlUtilsDataExtractor.updateDepartments(departments);
             return true;
@@ -78,7 +76,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public String updateChiefId(int chiefId) {
-        return updateXml((dep) -> dep.getChiefIdEmployee() == chiefId);
+        return updateXml((dep) -> dep.getChiefId() == chiefId);
     }
 
     @Override
@@ -106,7 +104,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public List<Department> showByChiefId(int chiefId) {
         return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
-                (dep) -> dep.getChiefIdEmployee() == chiefId);
+                (dep) -> dep.getChiefId() == chiefId);
     }
 
     @Override
@@ -130,7 +128,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         String strId = chiefId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
         return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
-                (dep) -> String.valueOf(dep.getChiefIdEmployee()).matches(strId));
+                (dep) -> String.valueOf(dep.getChiefId()).matches(strId));
     }
 
     private List<Department> removeDepartment(List<Department> departments, Predicate<Department> condition) {
@@ -169,7 +167,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                         int argument = Integer.parseInt(fieldValue[1]);
                         for (Department department: departments) {
                             if (condition.test(department)){
-                                department.setChiefIdEmployee(argument);
+                                department.setChiefId(argument);
                             }
                         }
                         break;

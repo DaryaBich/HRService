@@ -54,153 +54,141 @@ public class Controller {
     }
 
     private String switchAllStringCommand(String command) {
-        switch (command) {
-            case ("showAllDep"):
-                return listDepartmentsToString(departmentDao.showAll());
-            case ("showAllEmp"):
-                return listEmployeesToString(employeeDao.showAll());
-            case ("showAllPos"):
-                return listPositionsToString(positionDao.showAll());
-            case ("remAllEmp"):
-                return "Empty list of Employees";
-            case ("remAllDep"):
-                return "Empty list of Departments";
-            case ("remAllPos"):
-                return "Empty list of Positions";
-            case ("updAllEmp"):
-                return listEmployeesToString(employeeDao.updateAll());
-//            case ("updAllDep"):
-//                return listDepartmentsToString(departmentDao.updateAll());
-            case ("updAllPos"):
-                return listPositionsToString(positionDao.updateAll());
-            default:
+//        switch (command) {
+//            case ("showAllDep"):
+//                return listDepartmentsToString(departmentDao.showAll());
+//            case ("showAllEmp"):
+//                return listEmployeesToString(employeeDao.showAll());
+//            case ("showAllPos"):
+//                return listPositionsToString(positionDao.showAll());
+//            case ("remAllEmp"):
+//                return "Empty list of Employees";
+//            case ("remAllDep"):
+//                return "Empty list of Departments";
+//            case ("remAllPos"):
+//                return "Empty list of Positions";
+//            case ("updAllEmp"):
+//                return listEmployeesToString(employeeDao.updateAll());
+////            case ("updAllDep"):
+////                return listDepartmentsToString(departmentDao.updateAll());
+//            case ("updAllPos"):
+//                return listPositionsToString(positionDao.updateAll());
+//            default:
                 return "No result";
-        }
+        //}
     }
 
     private String switchCommand(String command, String[] arguments) {
         String result;
-        switch (command) {
-            case ("showEmpId"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    (employeeDao.showById(Integer.parseInt(arguments[0]))).toString();
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showEmpName"):
-                if (arguments.length == 1){
-                    return listEmployeesToString(employeeDao.showByName(arguments[0]));
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-            case ("showEmpDep"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return listEmployeesToString(employeeDao.showByDepartment(Integer.parseInt(arguments[0])));
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showEmpPhone"):
-                if (arguments.length == 1){
-                    return listEmployeesToString(employeeDao.showByPhoneNumber(arguments[0]));
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-            case ("showEmpSen"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return listEmployeesToString(employeeDao.showBySeniority(Integer.parseInt(arguments[0])));
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showEmpPos"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return listEmployeesToString(employeeDao.showByPositionId(Integer.parseInt(arguments[0])));
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showDepId"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return (departmentDao.showById(Integer.parseInt(arguments[0]))).toString();
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showDepName"):
-                if (arguments.length == 1){
-                    return listDepartmentsToString(departmentDao.showByName(arguments[0]));
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-            case ("showDepIdChief"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return (departmentDao.showByChiefId(Integer.parseInt(arguments[0]))).toString();
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showPosId"):
-                try {
-                    Integer.parseInt(arguments[0]);
-                    return (positionDao.showById(Integer.parseInt(arguments[0]))).toString();
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("showPosName"):
-                if (arguments.length == 1){
-                    return listPositionsToString(positionDao.showByName(arguments[0]));
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-            case ("showPosSal"):
-                try {
-                    double res = Double.parseDouble(arguments[0]);
-                    return  listPositionsToString(positionDao.showBySalary(res));
-                } catch (NumberFormatException e) {
-                    return "id not a digit!";
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    return "not enough arguments!";
-                }
-            case ("addEmp"):
-                if (arguments.length == 5){
-                    try{
-                        int idDep = Integer.parseInt(arguments[1]);
-                        int seniority = Integer.parseInt(arguments[3]);
-                        int idPos = Integer.parseInt(arguments[4]);
-                        return listEmployeesToString(employeeDao.addEmployee(arguments[0],
-                                idDep, arguments[2], seniority, idPos));
-                    } catch(NumberFormatException e){
-                        return "incorrect data or incorrect order!";
-                    }
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-//            case ("addDep"):
-//                if (arguments.length == 2){
+//        switch (command) {
+//            case ("showEmpId"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    (employeeDao.showById(Integer.parseInt(arguments[0]))).toString();
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showEmpName"):
+//                if (arguments.length == 1){
+//                    return listEmployeesToString(employeeDao.showByName(arguments[0]));
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
+//            case ("showEmpDep"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return listEmployeesToString(employeeDao.showByDepartment(Integer.parseInt(arguments[0])));
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showEmpPhone"):
+//                if (arguments.length == 1){
+//                    return listEmployeesToString(employeeDao.showByPhoneNumber(arguments[0]));
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
+//            case ("showEmpSen"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return listEmployeesToString(employeeDao.showBySeniority(Integer.parseInt(arguments[0])));
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showEmpPos"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return listEmployeesToString(employeeDao.showByPositionId(Integer.parseInt(arguments[0])));
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showDepId"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return (departmentDao.showById(Integer.parseInt(arguments[0]))).toString();
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showDepName"):
+//                if (arguments.length == 1){
+//                    return listDepartmentsToString(departmentDao.showByName(arguments[0]));
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
+//            case ("showDepIdChief"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return (departmentDao.showByChiefId(Integer.parseInt(arguments[0]))).toString();
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showPosId"):
+//                try {
+//                    Integer.parseInt(arguments[0]);
+//                    return (positionDao.showById(Integer.parseInt(arguments[0]))).toString();
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("showPosName"):
+//                if (arguments.length == 1){
+//                    return listPositionsToString(positionDao.showByName(arguments[0]));
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
+//            case ("showPosSal"):
+//                try {
+//                    double res = Double.parseDouble(arguments[0]);
+//                    return  listPositionsToString(positionDao.showBySalary(res));
+//                } catch (NumberFormatException e) {
+//                    return "id not a digit!";
+//                } catch (ArrayIndexOutOfBoundsException e) {
+//                    return "not enough arguments!";
+//                }
+//            case ("addEmp"):
+//                if (arguments.length == 5){
 //                    try{
-//                        int idChief = Integer.parseInt(arguments[1]);
-//                        return listDepartmentsToString(departmentDao.addDepartment(arguments[0], idChief));
+//                        int idDep = Integer.parseInt(arguments[1]);
+//                        int seniority = Integer.parseInt(arguments[3]);
+//                        int idPos = Integer.parseInt(arguments[4]);
+//                        return listEmployeesToString(employeeDao.addEmployee(arguments[0],
+//                                idDep, arguments[2], seniority, idPos));
 //                    } catch(NumberFormatException e){
 //                        return "incorrect data or incorrect order!";
 //                    }
@@ -208,89 +196,101 @@ public class Controller {
 //                else {
 //                    return "not enough/too much arguments!";
 //                }
-            case ("addPos"):
-                if (arguments.length == 2){
-                    try{
-                        double salary = Double.parseDouble(arguments[1]);
-                        return listPositionsToString(positionDao.addPosition(arguments[0], salary));
-                    } catch(NumberFormatException e){
-                        return "incorrect data or incorrect order!";
-                    }
-                }
-                else {
-                    return "not enough/too much arguments!";
-                }
-            case ("remEmpId"):
-                return "res";
-            case ("remEmpName"):
-                return "res";
-            case ("remEmpDep"):
-                return "res";
-            case ("remEmpPhone"):
-                return "res";
-            case ("remEmpSen"):
-                return "res";
-            case ("remEmpPos"):
-                return "res";
-            case ("remDepId"):
-                return "res";
-            case ("remDepName"):
-                return "res";
-            case ("remDepIdChief"):
-                return "res";
-            case ("remPosId"):
-                return "res";
-            case ("remPosName"):
-                return "res";
-            case ("remPosSal"):
-                return "res";
-            case ("updEmpId"):
-                return "res";
-            case ("updEmpName"):
-                return "res";
-            case ("updEmpDep"):
-                return "res";
-            case ("updEmpPhone"):
-                return "res";
-            case ("updEmpSen"):
-                return "res";
-            case ("updEmpPos"):
-                return "res";
-            case ("updDepId"):
-                return "res";
-            case ("updDepName"):
-                return "res";
-            case ("updDepIdChief"):
-                return "res";
-            case ("updPosId"):
-                return "res";
-            case ("updPosName"):
-                return "res";
-            case ("updPosSal"):
-                return "res";
-            case ("getEmpNameTemp"):
-                return "res";
-            case ("getEmpDepTemp"):
-                return "res";
-            case ("getEmpPhoneTemp"):
-                return "res";
-            case ("getEmpSenTemp"):
-                return "res";
-            case ("getEmpPosTemp"):
-                return "res";
-            case ("getDepIdTemp"):
-                return "res";
-            case ("getDepNameTemp"):
-                return "res";
-            case ("getDepIdChiefTemp"):
-                return "res";
-            case ("getPosIdTemp"):
-                return "res";
-            case ("getPosNameTemp"):
-                return "res";
-            case ("getPosSalTemp"):
-                return "res";
-        }
+////            case ("addDep"):
+////                if (arguments.length == 2){
+////                    try{
+////                        int idChief = Integer.parseInt(arguments[1]);
+////                        return listDepartmentsToString(departmentDao.addDepartment(arguments[0], idChief));
+////                    } catch(NumberFormatException e){
+////                        return "incorrect data or incorrect order!";
+////                    }
+////                }
+////                else {
+////                    return "not enough/too much arguments!";
+////                }
+//            case ("addPos"):
+//                if (arguments.length == 2){
+//                    try{
+//                        double salary = Double.parseDouble(arguments[1]);
+//                        return listPositionsToString(positionDao.addPosition(arguments[0], salary));
+//                    } catch(NumberFormatException e){
+//                        return "incorrect data or incorrect order!";
+//                    }
+//                }
+//                else {
+//                    return "not enough/too much arguments!";
+//                }
+//            case ("remEmpId"):
+//                return "res";
+//            case ("remEmpName"):
+//                return "res";
+//            case ("remEmpDep"):
+//                return "res";
+//            case ("remEmpPhone"):
+//                return "res";
+//            case ("remEmpSen"):
+//                return "res";
+//            case ("remEmpPos"):
+//                return "res";
+//            case ("remDepId"):
+//                return "res";
+//            case ("remDepName"):
+//                return "res";
+//            case ("remDepIdChief"):
+//                return "res";
+//            case ("remPosId"):
+//                return "res";
+//            case ("remPosName"):
+//                return "res";
+//            case ("remPosSal"):
+//                return "res";
+//            case ("updEmpId"):
+//                return "res";
+//            case ("updEmpName"):
+//                return "res";
+//            case ("updEmpDep"):
+//                return "res";
+//            case ("updEmpPhone"):
+//                return "res";
+//            case ("updEmpSen"):
+//                return "res";
+//            case ("updEmpPos"):
+//                return "res";
+//            case ("updDepId"):
+//                return "res";
+//            case ("updDepName"):
+//                return "res";
+//            case ("updDepIdChief"):
+//                return "res";
+//            case ("updPosId"):
+//                return "res";
+//            case ("updPosName"):
+//                return "res";
+//            case ("updPosSal"):
+//                return "res";
+//            case ("getEmpNameTemp"):
+//                return "res";
+//            case ("getEmpDepTemp"):
+//                return "res";
+//            case ("getEmpPhoneTemp"):
+//                return "res";
+//            case ("getEmpSenTemp"):
+//                return "res";
+//            case ("getEmpPosTemp"):
+//                return "res";
+//            case ("getDepIdTemp"):
+//                return "res";
+//            case ("getDepNameTemp"):
+//                return "res";
+//            case ("getDepIdChiefTemp"):
+//                return "res";
+//            case ("getPosIdTemp"):
+//                return "res";
+//            case ("getPosNameTemp"):
+//                return "res";
+//            case ("getPosSalTemp"):
+//                return "res";
+//        }
         return "res";
     }
 private String listEmployeesToString(List<Employee> employees){

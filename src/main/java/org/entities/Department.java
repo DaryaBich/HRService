@@ -44,15 +44,23 @@ public class Department {
         return name;
     }
 
-    public int getChiefIdEmployee() {
-        return chiefId;
-    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setChiefIdEmployee(int chiefIdEmployee) {
-        this.chiefId = chiefIdEmployee;
+    public Department() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setChiefId(int chiefId) {
+        this.chiefId = chiefId;
+    }
+
+    public int getChiefId() {
+        return chiefId;
     }
 }

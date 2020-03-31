@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<position xmlns="C:\Users\Darya\Desktop\Java\HRApp\positions.xml">
+<position>
+<id>1</id>
+<name>senior</name>
+<salary>123.5</salary>
+</position>
+<position>
+<id>2</id>
+<name>middle</name>
+<salary>70.8</salary>
+</position>
+</position>
