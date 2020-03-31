@@ -1,6 +1,7 @@
 package org.dao;
 import org.entities.Position;
 import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class PositionDaoImpl implements PositionDao {
             }
         }
         positions.add(position);
-        XmlUtilsDataExtractor.updatePositions(positions);
+        XmlUtilsDataUpdater.updatePositions(positions);
         return true;
     }
 
     @Override
     public void removeAll() {
-        XmlUtilsDataExtractor.updatePositions(new ArrayList<>());
+        XmlUtilsDataUpdater.updatePositions(new ArrayList<>());
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PositionDaoImpl implements PositionDao {
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getId() == id);
         if (count != positions.size()) {
-            XmlUtilsDataExtractor.updatePositions(positions);
+            XmlUtilsDataUpdater.updatePositions(positions);
             return true;
         } else {
             return false;
@@ -48,7 +49,7 @@ public class PositionDaoImpl implements PositionDao {
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getName().equals(name));
         if (count != positions.size()) {
-            XmlUtilsDataExtractor.updatePositions(positions);
+            XmlUtilsDataUpdater.updatePositions(positions);
             return true;
         } else {
             return false;
@@ -61,7 +62,7 @@ public class PositionDaoImpl implements PositionDao {
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getSalary() == salary);
         if (count != positions.size()) {
-            XmlUtilsDataExtractor.updatePositions(positions);
+            XmlUtilsDataUpdater.updatePositions(positions);
             return true;
         } else {
             return false;
@@ -175,7 +176,7 @@ public class PositionDaoImpl implements PositionDao {
                     }
             }
         }
-        XmlUtilsDataExtractor.updatePositions(positions);
+        XmlUtilsDataUpdater.updatePositions(positions);
         return "departments update";
     }
 

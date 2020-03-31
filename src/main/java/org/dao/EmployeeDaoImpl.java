@@ -2,6 +2,7 @@ package org.dao;
 
 import org.entities.Employee;
 import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -21,13 +22,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
             }
         }
         employees.add(employee);
-        XmlUtilsDataExtractor.updateEmployees(employees);
+        XmlUtilsDataUpdater.updateEmployees(employees);
         return true;
     }
 
     @Override
     public void removeAll() {
-        XmlUtilsDataExtractor.updateEmployees(new ArrayList<>());
+        XmlUtilsDataUpdater.updateEmployees(new ArrayList<>());
     }
 
     @Override
@@ -36,7 +37,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getId() == id);
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -49,7 +50,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getFIO().equals(Name));
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -62,7 +63,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdDepartment() == idDepartment);
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -75,7 +76,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getPhoneNumber().equals(phoneNumber));
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -88,7 +89,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getSeniority() == seniority);
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -101,7 +102,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdPosition() == positionId);
         if (count != employees.size()) {
-            XmlUtilsDataExtractor.updateEmployees(employees);
+            XmlUtilsDataUpdater.updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -295,7 +296,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                     }
             }
         }
-        XmlUtilsDataExtractor.updateEmployees(employeeList);
+        XmlUtilsDataUpdater.updateEmployees(employeeList);
         return "departments update";
     }
     private List<Employee> updateFields(List<Employee> employees, Predicate<Employee> condition1,

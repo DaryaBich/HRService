@@ -5,6 +5,7 @@ import org.entities.Department;
 import org.entities.Employee;
 import org.entities.Position;
 import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +18,19 @@ public class Application {
         List<Employee> lst = new ArrayList<>();
         lst.add(new Employee(4, "Валентин", 1, "378543", 1,2));
         lst.add(new Employee(5, "Валя", 1, "379543", 1,2));
-        XmlUtilsDataExtractor.updateEmployees(lst);
+       XmlUtilsDataUpdater.updateEmployees(lst);
         List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
         // department
         List<Department> departments = new ArrayList<>();
         departments.add(new Department(1, "hrs", 5));
         departments.add(new Department(3, "he", 4));
-        XmlUtilsDataExtractor.updateDepartments(departments);
+        XmlUtilsDataUpdater.updateDepartments(departments);
         departments = XmlUtilsDataExtractor.extractDepartments();
         // position
         List<Position> positions = new ArrayList<>();
         positions.add(new Position(1, "senior", 123.500));
         positions.add(new Position(2, "middle", 70.800));
-        XmlUtilsDataExtractor.updatePositions(positions);
+        XmlUtilsDataUpdater.updatePositions(positions);
         positions = XmlUtilsDataExtractor.extractPositions();
 
         DepartmentDao departmentDao = new DepartmentDaoImpl();

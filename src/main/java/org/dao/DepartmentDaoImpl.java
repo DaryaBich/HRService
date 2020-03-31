@@ -2,6 +2,7 @@ package org.dao;
 
 import org.entities.Department;
 import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
             }
         }
         departments.add(department);
-        XmlUtilsDataExtractor.updateDepartments(departments);
+        XmlUtilsDataUpdater.updateDepartments(departments);
         return true;
     }
 
     @Override
     public void removeAll() {
-        XmlUtilsDataExtractor.updateDepartments(new ArrayList<Department>());
+        XmlUtilsDataUpdater.updateDepartments(new ArrayList<Department>());
     }
 
     @Override
@@ -35,7 +36,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getId() == id);
         if (departments.size() != count) {
-            XmlUtilsDataExtractor.updateDepartments(departments);
+            XmlUtilsDataUpdater.updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -49,7 +50,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getName().equals(name));
         if (departments.size() != count) {
-            XmlUtilsDataExtractor.updateDepartments(departments);
+            XmlUtilsDataUpdater.updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -62,7 +63,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
-            XmlUtilsDataExtractor.updateDepartments(departments);
+            XmlUtilsDataUpdater.updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -178,7 +179,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                     }
             }
         }
-        XmlUtilsDataExtractor.updateDepartments(departments);
+        XmlUtilsDataUpdater.updateDepartments(departments);
         return "departments update";
     }
 }
