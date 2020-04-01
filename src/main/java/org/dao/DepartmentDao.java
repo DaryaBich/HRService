@@ -13,6 +13,8 @@ public interface DepartmentDao {
     boolean removeByName(String name);
     boolean removeByChiefId(int chiefId);
     // update
+    String updateAll();
+    String updateID(int id);
    String updateName(String name);
    String updateChiefId(int chiefId);
     // show

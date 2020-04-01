@@ -3,9 +3,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 import java.util.Objects;
-@XmlRootElement
-@XmlType(name = "employee")
+
 public class Employee {
 
     private int id;
@@ -61,11 +61,11 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(FIO, idDepartment, phoneNumber, seniority, idPosition);
     }
-    @XmlAttribute
+
     public int getId() {
         return id;
     }
-    @XmlElement(name = "fio")
+
     public String getFIO() {
         return FIO;
     }
@@ -73,7 +73,7 @@ public class Employee {
     public void setFIO(String FIO) {
         this.FIO = FIO;
     }
-    @XmlElement(name = "departmentID")
+
     public int getIdDepartment() {
         return idDepartment;
     }
@@ -81,7 +81,7 @@ public class Employee {
     public void setIdDepartment(int idDepartment) {
         this.idDepartment = idDepartment;
     }
-    @XmlElement(name = "phoneNumber")
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -89,7 +89,7 @@ public class Employee {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    @XmlElement(name = "seniority")
+
     public int getSeniority() {
         return seniority;
     }
@@ -97,7 +97,7 @@ public class Employee {
     public void setSeniority(int seniority) {
         this.seniority = seniority;
     }
-    @XmlElement(name = "positionID")
+
     public int getIdPosition() {
         return idPosition;
     }
@@ -108,5 +108,12 @@ public class Employee {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public static String listEmployeesToString(List<Employee> employees){
+        StringBuilder sBEmployee = new StringBuilder();
+        for (Employee empl:employees) {
+            sBEmployee.append(empl.toString());
+        }
+        return sBEmployee.toString();
     }
 }

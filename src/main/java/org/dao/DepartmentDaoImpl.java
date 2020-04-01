@@ -10,16 +10,22 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class DepartmentDaoImpl implements DepartmentDao {
-
+private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
     @Override
+    // вводить
     public boolean addDepartment(String name, int chiefIdEmployee) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         Department department = new Department(departments.size() + 1, name, chiefIdEmployee);
+        int maxId = departments.size() + 1;
         for (Department dep : departments) {
             if (dep.equals(department)) {
                 return false;
             }
+            if (dep.getId() > maxId){
+                maxId = dep.getId();
+            }
         }
+        department.setId(maxId + 1);
         departments.add(department);
         XmlUtilsDataUpdater.updateDepartments(departments);
         return true;
@@ -32,7 +38,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public boolean removeById(int id) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getId() == id);
         if (departments.size() != count) {
@@ -46,7 +52,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public boolean removeByName(String name) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getName().equals(name));
         if (departments.size() != count) {
@@ -59,7 +65,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public boolean removeByChiefId(int chiefId) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
@@ -69,7 +75,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return false;
         }
     }
-
+    @Override
+    public String updateAll(){
+        return updateXml((dep) -> true);
+    }
+    @Override
+    public String updateID(int id){
+        return updateXml((dep) -> dep.getId() == id);
+    }
     @Override
     public String updateName(String name) {
         return updateXml((dep) -> dep.getName().equals(name));
@@ -82,7 +95,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department showById(int id) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         for (Department dep : departments) {
             if (dep.getId() == id) {
                 return dep;
@@ -93,18 +106,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> showAll() {
-        return XmlUtilsDataExtractor.extractDepartments();
+        return XmlUtilsDataExtractor.extractDepartments(filepath);
     }
 
     @Override
     public List<Department> showByName(String name) {
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
+        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
                 (dep) -> dep.getName().equals(name));
     }
 
     @Override
     public List<Department> showByChiefId(int chiefId) {
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
+        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
                 (dep) -> dep.getChiefId() == chiefId);
     }
 
@@ -112,7 +125,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByIdTemplate(String id) {
         String strId = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
+        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
                 (dep) -> String.valueOf(dep.getId()).matches(strId));
     }
 
@@ -120,7 +133,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByNameTemplate(String name) {
         String argument = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
+        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
                 (dep) -> dep.getName().matches(argument));
     }
 
@@ -128,7 +141,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByChiefIdTemplate(String chiefId) {
         String strId = chiefId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(),
+        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
                 (dep) -> String.valueOf(dep.getChiefId()).matches(strId));
     }
 
@@ -152,9 +165,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
     private String updateXml(Predicate<Department> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments();
+        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
         for (String str : arguments) {
-            String[] fieldValue = str.split("=");
+            String[] fieldValue = str.split("/");
             switch (fieldValue[0]){
                 case "name":
                     for (Department department: departments) {

@@ -1,5 +1,6 @@
 package org.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Position {
@@ -62,5 +63,12 @@ public class Position {
     }
 
     public Position() {
+    }
+    public static String listPositionsToString(List<Position> positions){
+        StringBuilder sBPosition = new StringBuilder();
+        for (Position pos : positions) {
+            sBPosition.append(pos.toString());
+        }
+        return sBPosition.toString();
     }
 }

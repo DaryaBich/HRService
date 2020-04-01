@@ -11,16 +11,21 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-
+private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
     @Override
     public boolean addEmployee(String FIO, int idDepartment, String phoneNumber, int seniority, int position) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+        int maxId = employees.size() + 1;
         Employee employee = new Employee(employees.size() + 1, FIO, idDepartment, phoneNumber, seniority, position);
         for (Employee emp : employees) {
             if (emp.equals(employee)) {
                 return false;
             }
+            if (emp.getId() > maxId) {
+                maxId = emp.getId();
+            }
         }
+        employee.setId(maxId + 1);
         employees.add(employee);
         XmlUtilsDataUpdater.updateEmployees(employees);
         return true;
@@ -33,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeById(int id) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getId() == id);
         if (count != employees.size()) {
@@ -46,7 +51,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByName(String Name) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getFIO().equals(Name));
         if (count != employees.size()) {
@@ -59,7 +64,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByDepartmentId(int idDepartment) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdDepartment() == idDepartment);
         if (count != employees.size()) {
@@ -72,7 +77,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByPhoneNumber(String phoneNumber) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getPhoneNumber().equals(phoneNumber));
         if (count != employees.size()) {
@@ -85,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeBySeniority(int seniority) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getSeniority() == seniority);
         if (count != employees.size()) {
@@ -98,7 +103,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByPositionId(int positionId) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdPosition() == positionId);
         if (count != employees.size()) {
@@ -110,33 +115,43 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public String updateName(String FIO, Employee... employees) {
+    public String updateAll() {
+        return updateXml(dep -> true);
+    }
+
+    @Override
+    public String updateId(int id) {
+        return updateXml(dep -> dep.getId() == id);
+    }
+
+    @Override
+    public String updateName(String FIO) {
         return updateXml((emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
-    public String updateDepartment(int idDepartment, Employee... employees) {
+    public String updateDepartment(int idDepartment) {
         return updateXml((emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
-    public String updatePhoneNumber(String phoneNumber, Employee... employees) {
+    public String updatePhoneNumber(String phoneNumber) {
         return updateXml((emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
-    public String updateSeniority(int seniority, Employee... employees) {
+    public String updateSeniority(int seniority) {
         return updateXml((emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
-    public String updatePositionId(int positionId, Employee... employees) {
+    public String updatePositionId(int positionId) {
         return updateXml((emp) -> emp.getIdPosition() == positionId);
     }
 
     @Override
     public Employee showById(int id) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
         for (Employee emp : employees) {
             if (emp.getId() == id) {
                 return emp;
@@ -147,36 +162,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> showAll() {
-        return XmlUtilsDataExtractor.extractEmployees();
+        return XmlUtilsDataExtractor.extractEmployees(filepath);
     }
 
     @Override
     public List<Employee> showByName(String FIO) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
     public List<Employee> showByDepartment(int idDepartment) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
     public List<Employee> showByPhoneNumber(String phoneNumber) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
     public List<Employee> showBySeniority(int seniority) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
     public List<Employee> showByPositionId(int positionId) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getIdPosition() == positionId);
     }
 
@@ -184,7 +199,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> String.valueOf(emp.getId()).matches(template));
     }
 
@@ -193,7 +208,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByNameTemplate(String FIO) {
         String template = FIO.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getFIO().matches(template));
     }
 
@@ -201,7 +216,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByDepartmentTemplate(String idDepartment) {
         String template = idDepartment.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> String.valueOf(emp.getIdDepartment()).matches(template));
     }
 
@@ -209,7 +224,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByPhoneNumberTemplate(String phoneNumber) {
         String template = phoneNumber.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> emp.getPhoneNumber().matches(template));
     }
 
@@ -217,7 +232,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showBySeniorityTemplate(String seniority) {
         String template = seniority.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> String.valueOf(emp.getSeniority()).matches(template));
     }
 
@@ -225,7 +240,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByPositionIdTemplate(String positionId) {
         String template = positionId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(),
+        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
                 (emp) -> String.valueOf(emp.getIdPosition()).matches(template));
     }
 
@@ -247,25 +262,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         return result;
     }
+
     private String updateXml(Predicate<Employee> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Employee> employeeList = XmlUtilsDataExtractor.extractEmployees();
+        List<Employee> employeeList = XmlUtilsDataExtractor.extractEmployees(filepath);
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
-            switch (fieldValue[0]){
+            switch (fieldValue[0]) {
                 case "FIO":
-                    employeeList = updateFields(employeeList, condition,
-                            (emp) -> emp.setFIO(fieldValue[1]));
+                    employeeList = updateFields(employeeList, condition, (emp) -> emp.setFIO(fieldValue[1]));
                     break;
                 case "phoneNumber":
-                    employeeList = updateFields(employeeList, condition,
-                            (emp) -> emp.setPhoneNumber(fieldValue[1]));
+                    employeeList = updateFields(employeeList, condition, (emp) -> emp.setPhoneNumber(fieldValue[1]));
                     break;
                 case "idDepartment":
                     try {
                         int argument = Integer.parseInt(fieldValue[1]);
-                        employeeList = updateFields(employeeList, condition,
-                                (emp) -> emp.setIdDepartment(argument));
+                        employeeList = updateFields(employeeList, condition, (emp) -> emp.setIdDepartment(argument));
                         break;
                     } catch (NumberFormatException e) {
                         return "isn`t a digit!";
@@ -275,8 +288,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 case "seniority":
                     try {
                         int argument = Integer.parseInt(fieldValue[1]);
-                        employeeList = updateFields(employeeList, condition,
-                                (emp) -> emp.setSeniority(argument));
+                        employeeList = updateFields(employeeList, condition, (emp) -> emp.setSeniority(argument));
                         break;
                     } catch (NumberFormatException e) {
                         return "isn`t a digit!";
@@ -286,8 +298,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 case "idPosition":
                     try {
                         int argument = Integer.parseInt(fieldValue[1]);
-                        employeeList = updateFields(employeeList, condition,
-                                (emp) -> emp.setIdPosition(argument));
+                        employeeList = updateFields(employeeList, condition, (emp) -> emp.setIdPosition(argument));
                         break;
                     } catch (NumberFormatException e) {
                         return "isn`t a digit!";
@@ -299,10 +310,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
         XmlUtilsDataUpdater.updateEmployees(employeeList);
         return "departments update";
     }
+
     private List<Employee> updateFields(List<Employee> employees, Predicate<Employee> condition1,
-                              Consumer<Employee> condition2){
-        for (Employee emp: employees) {
-            if (condition1.test(emp)){
+                                        Consumer<Employee> condition2) {
+        for (Employee emp : employees) {
+            if (condition1.test(emp)) {
                 condition2.accept(emp);
             }
         }

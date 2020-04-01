@@ -18,11 +18,12 @@ public interface PositionDao {
     boolean removeBySalary(double salary);
 
     // update
-    String updateId(int id, Position... positions);
+    String updateAll();
+    String updateId(int id);
 
-    String updateName(String name, Position... positions);
+    String updateName(String name);
 
-    String updateSalary(double salary, Position... positions);
+    String updateSalary(double salary);
 
     // show
     Position showById(int id);

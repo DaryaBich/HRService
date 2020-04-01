@@ -1,5 +1,6 @@
 package org.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Department {
@@ -62,5 +63,13 @@ public class Department {
 
     public int getChiefId() {
         return chiefId;
+    }
+
+    public static String listDepartmentsToString(List<Department> departments){
+        StringBuilder sBDepartment = new StringBuilder();
+        for (Department dep : departments) {
+            sBDepartment.append(dep.toString());
+        }
+        return sBDepartment.toString();
     }
 }

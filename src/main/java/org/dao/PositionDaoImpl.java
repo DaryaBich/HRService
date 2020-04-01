@@ -1,4 +1,5 @@
 package org.dao;
+
 import org.entities.Position;
 import org.utils.XmlUtilsDataExtractor;
 import org.utils.XmlUtilsDataUpdater;
@@ -10,16 +11,21 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class PositionDaoImpl implements PositionDao {
-
+private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
     @Override
     public boolean addPosition(String name, double salary) {
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
+        int maxId = positions.size() + 1;
         Position position = new Position(positions.size() + 1, name, salary);
         for (Position pos : positions) {
             if (pos.equals(position)) {
                 return false;
             }
+            if (pos.getId() > maxId) {
+                maxId = pos.getId();
+            }
         }
+        position.setId(maxId + 1);
         positions.add(position);
         XmlUtilsDataUpdater.updatePositions(positions);
         return true;
@@ -32,7 +38,7 @@ public class PositionDaoImpl implements PositionDao {
 
     @Override
     public boolean removeById(int id) {
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getId() == id);
         if (count != positions.size()) {
@@ -45,7 +51,7 @@ public class PositionDaoImpl implements PositionDao {
 
     @Override
     public boolean removeByName(String name) {
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getName().equals(name));
         if (count != positions.size()) {
@@ -58,7 +64,7 @@ public class PositionDaoImpl implements PositionDao {
 
     @Override
     public boolean removeBySalary(double salary) {
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getSalary() == salary);
         if (count != positions.size()) {
@@ -70,23 +76,28 @@ public class PositionDaoImpl implements PositionDao {
     }
 
     @Override
-    public String updateId(int id, Position... positions) {
+    public String updateAll() {
+        return updateXml(dep -> true);
+    }
+
+    @Override
+    public String updateId(int id) {
         return updateXml(pos -> pos.getId() == id);
     }
 
     @Override
-    public String updateName(String name, Position... positions) {
+    public String updateName(String name) {
         return updateXml(pos -> pos.getName().equals(name));
     }
 
     @Override
-    public String updateSalary(double salary, Position... positions) {
+    public String updateSalary(double salary) {
         return updateXml(pos -> pos.getSalary() == salary);
     }
 
     @Override
     public Position showById(int id) {
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
         for (Position pos : positions) {
             if (pos.getId() == id) {
                 return pos;
@@ -97,18 +108,18 @@ public class PositionDaoImpl implements PositionDao {
 
     @Override
     public List<Position> showAll() {
-        return XmlUtilsDataExtractor.extractPositions();
+        return XmlUtilsDataExtractor.extractPositions(filepath);
     }
 
     @Override
     public List<Position> showByName(String name) {
-        return removePosition(XmlUtilsDataExtractor.extractPositions(),
+        return removePosition(XmlUtilsDataExtractor.extractPositions(filepath),
                 (pos) -> pos.getName().equals(name));
     }
 
     @Override
     public List<Position> showBySalary(double salary) {
-        return removePosition(XmlUtilsDataExtractor.extractPositions(),
+        return removePosition(XmlUtilsDataExtractor.extractPositions(filepath),
                 (pos) -> pos.getSalary() == salary);
     }
 
@@ -116,7 +127,7 @@ public class PositionDaoImpl implements PositionDao {
     public List<Position> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(XmlUtilsDataExtractor.extractPositions(),
+        return showPosition(XmlUtilsDataExtractor.extractPositions(filepath),
                 (pos) -> String.valueOf(pos.getId()).matches(template));
     }
 
@@ -124,7 +135,7 @@ public class PositionDaoImpl implements PositionDao {
     public List<Position> showByNameTemplate(String name) {
         String template = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showPosition(XmlUtilsDataExtractor.extractPositions(),
+        return showPosition(XmlUtilsDataExtractor.extractPositions(filepath),
                 (pos) -> pos.getName().matches(template));
     }
 
@@ -132,7 +143,7 @@ public class PositionDaoImpl implements PositionDao {
     public List<Position> showBySalaryTemplate(String salary) {
         String template = salary.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(XmlUtilsDataExtractor.extractPositions(),
+        return showPosition(XmlUtilsDataExtractor.extractPositions(filepath),
                 (pos) -> String.valueOf(pos.getSalary()).matches(template));
     }
 
@@ -157,7 +168,7 @@ public class PositionDaoImpl implements PositionDao {
 
     private String updateXml(Predicate<Position> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Position> positions = XmlUtilsDataExtractor.extractPositions();
+        List<Position> positions = XmlUtilsDataExtractor.extractPositions(filepath);
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {

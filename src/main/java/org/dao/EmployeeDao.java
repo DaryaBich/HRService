@@ -25,16 +25,18 @@ public interface EmployeeDao {
     boolean removeByPositionId(int positionId);
 
     // update
+    String updateAll();
+    String updateId(int id);
 
-    String updateName(String FIO, Employee... employees);
+    String updateName(String FIO);
 
-    String updateDepartment(int idDepartment, Employee... employees);
+    String updateDepartment(int idDepartment);
 
-    String updatePhoneNumber(String phoneNumber, Employee... employees);
+    String updatePhoneNumber(String phoneNumber);
 
-    String updateSeniority(int seniority, Employee... employees);
+    String updateSeniority(int seniority);
 
-    String updatePositionId(int positionId, Employee... employees);
+    String updatePositionId(int positionId);
 
     // show
     Employee showById(int id);

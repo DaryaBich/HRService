@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XmlUtilsDataExtractor {
-    public static List<Employee> extractEmployees() {
-        String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
+    public static List<Employee> extractEmployees(String filepath) {
+        //String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
         File xmlFile = new File(filepath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -52,8 +52,8 @@ public class XmlUtilsDataExtractor {
     }
 
 
-    public static List<Department> extractDepartments() {
-        String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
+    public static List<Department> extractDepartments(String filepath) {
+        //String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
         File xmlFile = new File(filepath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -83,8 +83,8 @@ public class XmlUtilsDataExtractor {
         return department;
     }
 
-    public static List<Position> extractPositions() {
-        String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
+    public static List<Position> extractPositions(String filepath) {
+        //String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
         File xmlFile = new File(filepath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
