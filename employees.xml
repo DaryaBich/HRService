@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <employees xmlns="C:\Users\Darya\Desktop\Java\HRApp\employees.xml">
-<employee>
-<id>4</id>
-<fio>Валентин</fio>
-<idDepartment>1</idDepartment>
-<phoneNumber>378543</phoneNumber>
-<seniority>1</seniority>
-<idPosition>2</idPosition>
-</employee>
-<employee>
-<id>5</id>
-<fio>Валя</fio>
-<idDepartment>1</idDepartment>
-<phoneNumber>379543</phoneNumber>
-<seniority>1</seniority>
-<idPosition>2</idPosition>
-</employee>
+    <employee>
+        <id>4</id>
+        <fio>Валентин</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>678765</phoneNumber>
+        <seniority>1</seniority>
+        <idPosition>2</idPosition>
+    </employee>
+    <employee>
+        <id>5</id>
+        <fio>Валя</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>678765</phoneNumber>
+        <seniority>1</seniority>
+        <idPosition>2</idPosition>
+    </employee>
+    <employee>
+        <id>6</id>
+        <fio>Роман</fio>
+        <idDepartment>2</idDepartment>
+        <phoneNumber>892799</phoneNumber>
+        <seniority>4</seniority>
+        <idPosition>3</idPosition>
+    </employee>
 </employees>

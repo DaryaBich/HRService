@@ -1,8 +1,9 @@
 package org.entities;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import org.utils.JsonUtilsDataExtractor;
+import org.utils.JsonUtilsDataUpdater;
+import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -40,8 +41,8 @@ public class Employee {
                 " | id = " + id +
                 " | Department = " + idDepartment +
                 " | Phone = " + phoneNumber + '\'' +
-                " | Seniority =" + seniority +
-                " | Position=" + idPosition +
+                " | Seniority = " + seniority +
+                " | Position = " + idPosition +
                 '\n';
     }
 
@@ -116,4 +117,19 @@ public class Employee {
         }
         return sBEmployee.toString();
     }
+    public static List<Employee> chooseFile(boolean fileType){
+        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
+        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.json";
+        return fileType? XmlUtilsDataExtractor.extractEmployees(filepathXml):
+                JsonUtilsDataExtractor.extractEmployees(filepathJson);
+    }
+    public static void updateChoosingFile(boolean fileType, List<Employee> employees){
+        if (fileType){
+            XmlUtilsDataUpdater.updateEmployees(employees);
+        }
+        else {
+            JsonUtilsDataUpdater.updateEmployees(employees);
+        }
+    }
+
 }

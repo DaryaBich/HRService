@@ -1,6 +1,8 @@
 package org.dao;
 
 import org.entities.Employee;
+import org.utils.JsonUtilsDataExtractor;
+import org.utils.JsonUtilsDataUpdater;
 import org.utils.XmlUtilsDataExtractor;
 import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
@@ -11,10 +13,10 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
     @Override
-    public boolean addEmployee(String FIO, int idDepartment, String phoneNumber, int seniority, int position) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean addEmployee(boolean fileType, String FIO, int idDepartment, String phoneNumber, int seniority,
+                               int position) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int maxId = employees.size() + 1;
         Employee employee = new Employee(employees.size() + 1, FIO, idDepartment, phoneNumber, seniority, position);
         for (Employee emp : employees) {
@@ -27,22 +29,22 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
         }
         employee.setId(maxId + 1);
         employees.add(employee);
-        XmlUtilsDataUpdater.updateEmployees(employees);
+        Employee.updateChoosingFile(fileType, employees);
         return true;
     }
 
     @Override
-    public void removeAll() {
-        XmlUtilsDataUpdater.updateEmployees(new ArrayList<>());
+    public void removeAll(boolean fileType) {
+        Employee.updateChoosingFile(fileType, new ArrayList<Employee>());
     }
 
     @Override
-    public boolean removeById(int id) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeById(boolean fileType, int id) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getId() == id);
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -50,12 +52,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public boolean removeByName(String Name) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeByName(boolean fileType, String Name) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getFIO().equals(Name));
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -63,12 +65,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public boolean removeByDepartmentId(int idDepartment) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeByDepartmentId(boolean fileType, int idDepartment) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdDepartment() == idDepartment);
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -76,12 +78,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public boolean removeByPhoneNumber(String phoneNumber) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeByPhoneNumber(boolean fileType, String phoneNumber) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getPhoneNumber().equals(phoneNumber));
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -89,12 +91,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public boolean removeBySeniority(int seniority) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeBySeniority(boolean fileType, int seniority) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getSeniority() == seniority);
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -102,12 +104,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public boolean removeByPositionId(int positionId) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public boolean removeByPositionId(boolean fileType, int positionId) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdPosition() == positionId);
         if (count != employees.size()) {
-            XmlUtilsDataUpdater.updateEmployees(employees);
+            Employee.updateChoosingFile(fileType, employees);
             return true;
         } else {
             return false;
@@ -115,43 +117,43 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public String updateAll() {
-        return updateXml(dep -> true);
+    public String updateAll(boolean fileType) {
+        return updater(dep -> true,fileType);
     }
 
     @Override
-    public String updateId(int id) {
-        return updateXml(dep -> dep.getId() == id);
+    public String updateId(boolean fileType, int id) {
+        return updater(dep -> dep.getId() == id, fileType);
     }
 
     @Override
-    public String updateName(String FIO) {
-        return updateXml((emp) -> emp.getFIO().equals(FIO));
+    public String updateName(boolean fileType, String FIO) {
+        return updater((emp) -> emp.getFIO().equals(FIO), fileType);
     }
 
     @Override
-    public String updateDepartment(int idDepartment) {
-        return updateXml((emp) -> emp.getIdDepartment() == idDepartment);
+    public String updateDepartment(boolean fileType, int idDepartment) {
+        return updater((emp) -> emp.getIdDepartment() == idDepartment, fileType);
     }
 
     @Override
-    public String updatePhoneNumber(String phoneNumber) {
-        return updateXml((emp) -> emp.getPhoneNumber().equals(phoneNumber));
+    public String updatePhoneNumber(boolean fileType, String phoneNumber) {
+        return updater((emp) -> emp.getPhoneNumber().equals(phoneNumber), fileType);
     }
 
     @Override
-    public String updateSeniority(int seniority) {
-        return updateXml((emp) -> emp.getSeniority() == seniority);
+    public String updateSeniority(boolean fileType, int seniority) {
+        return updater((emp) -> emp.getSeniority() == seniority, fileType);
     }
 
     @Override
-    public String updatePositionId(int positionId) {
-        return updateXml((emp) -> emp.getIdPosition() == positionId);
+    public String updatePositionId(boolean fileType, int positionId) {
+        return updater((emp) -> emp.getIdPosition() == positionId, fileType);
     }
 
     @Override
-    public Employee showById(int id) {
-        List<Employee> employees = XmlUtilsDataExtractor.extractEmployees(filepath);
+    public Employee showById(boolean fileType, int id) {
+        List<Employee> employees = Employee.chooseFile(fileType);
         for (Employee emp : employees) {
             if (emp.getId() == id) {
                 return emp;
@@ -161,86 +163,79 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
     }
 
     @Override
-    public List<Employee> showAll() {
-        return XmlUtilsDataExtractor.extractEmployees(filepath);
+    public List<Employee> showAll(boolean fileType) {
+        return Employee.chooseFile(fileType);
     }
 
     @Override
-    public List<Employee> showByName(String FIO) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
+    public List<Employee> showByName(boolean fileType, String FIO) {
+        return removeEmployee(Employee.chooseFile(fileType),
                 (emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
-    public List<Employee> showByDepartment(int idDepartment) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getIdDepartment() == idDepartment);
+    public List<Employee> showByDepartment(boolean fileType, int idDepartment) {
+        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
-    public List<Employee> showByPhoneNumber(String phoneNumber) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getPhoneNumber().equals(phoneNumber));
+    public List<Employee> showByPhoneNumber(boolean fileType, String phoneNumber) {
+        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
-    public List<Employee> showBySeniority(int seniority) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getSeniority() == seniority);
+    public List<Employee> showBySeniority(boolean fileType, int seniority) {
+        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
-    public List<Employee> showByPositionId(int positionId) {
-        return removeEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getIdPosition() == positionId);
+    public List<Employee> showByPositionId(boolean fileType, int positionId) {
+        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getIdPosition() == positionId);
     }
 
     @Override
-    public List<Employee> showByIdTemplate(String id) {
+    public List<Employee> showByIdTemplate(boolean fileType, String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> String.valueOf(emp.getId()).matches(template));
+        return showEmployee(Employee.chooseFile(fileType), (emp) -> String.valueOf(emp.getId()).matches(template));
     }
 
 
     @Override
-    public List<Employee> showByNameTemplate(String FIO) {
+    public List<Employee> showByNameTemplate(boolean fileType, String FIO) {
         String template = FIO.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getFIO().matches(template));
+        return showEmployee(Employee.chooseFile(fileType), (emp) -> emp.getFIO().matches(template));
     }
 
     @Override
-    public List<Employee> showByDepartmentTemplate(String idDepartment) {
+    public List<Employee> showByDepartmentTemplate(boolean fileType, String idDepartment) {
         String template = idDepartment.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
+        return showEmployee(Employee.chooseFile(fileType),
                 (emp) -> String.valueOf(emp.getIdDepartment()).matches(template));
     }
 
     @Override
-    public List<Employee> showByPhoneNumberTemplate(String phoneNumber) {
+    public List<Employee> showByPhoneNumberTemplate(boolean fileType, String phoneNumber) {
         String template = phoneNumber.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
-                (emp) -> emp.getPhoneNumber().matches(template));
+        return showEmployee(Employee.chooseFile(fileType), (emp) -> emp.getPhoneNumber().matches(template));
     }
 
     @Override
-    public List<Employee> showBySeniorityTemplate(String seniority) {
+    public List<Employee> showBySeniorityTemplate(boolean fileType, String seniority) {
         String template = seniority.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
+        return showEmployee(Employee.chooseFile(fileType),
                 (emp) -> String.valueOf(emp.getSeniority()).matches(template));
     }
 
     @Override
-    public List<Employee> showByPositionIdTemplate(String positionId) {
+    public List<Employee> showByPositionIdTemplate(boolean fileType, String positionId) {
         String template = positionId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(XmlUtilsDataExtractor.extractEmployees(filepath),
+        return showEmployee(Employee.chooseFile(fileType),
                 (emp) -> String.valueOf(emp.getIdPosition()).matches(template));
     }
 
@@ -248,6 +243,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
         for (int i = 0; i < employees.size(); i++) {
             if (condition.test(employees.get(i))) {
                 employees.remove(i);
+                i = -1;
             }
         }
         return employees;
@@ -263,9 +259,9 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
         return result;
     }
 
-    private String updateXml(Predicate<Employee> condition) {
+    private String updater(Predicate<Employee> condition, boolean fileType) {
         String[] arguments = View.inputUpdateArguments();
-        List<Employee> employeeList = XmlUtilsDataExtractor.extractEmployees(filepath);
+        List<Employee> employeeList = Employee.chooseFile(fileType);
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {
@@ -307,7 +303,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
                     }
             }
         }
-        XmlUtilsDataUpdater.updateEmployees(employeeList);
+        Employee.updateChoosingFile(fileType, employeeList);
         return "departments update";
     }
 
@@ -320,4 +316,5 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml
         }
         return employees;
     }
+
 }

@@ -6,64 +6,64 @@ import java.util.List;
 
 public interface EmployeeDao {
     // add
-    boolean addEmployee(String FIO, int idDepartment,
+    boolean addEmployee(boolean fileType, String FIO, int idDepartment,
                                String phoneNumber, int seniority, int position);
 
     // remove
-    void removeAll();
+    void removeAll(boolean fileType);
 
-    boolean removeById(int id);
+    boolean removeById(boolean fileType, int id);
 
-    boolean removeByName(String Name);
+    boolean removeByName(boolean fileType, String Name);
 
-    boolean removeByDepartmentId(int idDepartment);
+    boolean removeByDepartmentId(boolean fileType, int idDepartment);
 
-    boolean removeByPhoneNumber(String phoneNumber);
+    boolean removeByPhoneNumber(boolean fileType, String phoneNumber);
 
-    boolean removeBySeniority(int seniority);
+    boolean removeBySeniority(boolean fileType, int seniority);
 
-    boolean removeByPositionId(int positionId);
+    boolean removeByPositionId(boolean fileType, int positionId);
 
     // update
-    String updateAll();
-    String updateId(int id);
+    String updateAll(boolean fileType);
+    String updateId(boolean fileType, int id);
 
-    String updateName(String FIO);
+    String updateName(boolean fileType, String FIO);
 
-    String updateDepartment(int idDepartment);
+    String updateDepartment(boolean fileType, int idDepartment);
 
-    String updatePhoneNumber(String phoneNumber);
+    String updatePhoneNumber(boolean fileType, String phoneNumber);
 
-    String updateSeniority(int seniority);
+    String updateSeniority(boolean fileType, int seniority);
 
-    String updatePositionId(int positionId);
+    String updatePositionId(boolean fileType, int positionId);
 
     // show
-    Employee showById(int id);
+    Employee showById(boolean fileType, int id);
 
-    List<Employee> showAll();
+    List<Employee> showAll(boolean fileType);
 
-    List<Employee> showByName(String FIO);
+    List<Employee> showByName(boolean fileType, String FIO);
 
-    List<Employee> showByDepartment(int idDepartment);
+    List<Employee> showByDepartment(boolean fileType, int idDepartment);
 
-    List<Employee> showByPhoneNumber(String phoneNumber);
+    List<Employee> showByPhoneNumber(boolean fileType, String phoneNumber);
 
-    List<Employee> showBySeniority(int seniority);
+    List<Employee> showBySeniority(boolean fileType, int seniority);
 
-    List<Employee> showByPositionId(int positionId);
+    List<Employee> showByPositionId(boolean fileType, int positionId);
 
     // get by template
-    List<Employee> showByIdTemplate(String id);
+    List<Employee> showByIdTemplate(boolean fileType, String id);
 
 
-    List<Employee> showByNameTemplate(String FIO);
+    List<Employee> showByNameTemplate(boolean fileType, String FIO);
 
-    List<Employee> showByDepartmentTemplate(String idDepartment);
+    List<Employee> showByDepartmentTemplate(boolean fileType, String idDepartment);
 
-    List<Employee> showByPhoneNumberTemplate(String phoneNumber);
+    List<Employee> showByPhoneNumberTemplate(boolean fileType, String phoneNumber);
 
-    List<Employee> showBySeniorityTemplate(String seniority);
+    List<Employee> showBySeniorityTemplate(boolean fileType, String seniority);
 
-    List<Employee> showByPositionIdTemplate(String positionId);
+    List<Employee> showByPositionIdTemplate(boolean fileType, String positionId);
 }

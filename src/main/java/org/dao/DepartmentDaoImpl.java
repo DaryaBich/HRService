@@ -1,6 +1,9 @@
 package org.dao;
 
 import org.entities.Department;
+import org.entities.Position;
+import org.utils.JsonUtilsDataExtractor;
+import org.utils.JsonUtilsDataUpdater;
 import org.utils.XmlUtilsDataExtractor;
 import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
@@ -10,11 +13,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class DepartmentDaoImpl implements DepartmentDao {
-private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
     @Override
     // вводить
-    public boolean addDepartment(String name, int chiefIdEmployee) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+    public boolean addDepartment(boolean fileType, String name, int chiefIdEmployee) {
+        List<Department> departments = Department.chooseFile(fileType);
         Department department = new Department(departments.size() + 1, name, chiefIdEmployee);
         int maxId = departments.size() + 1;
         for (Department dep : departments) {
@@ -27,22 +29,22 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
         }
         department.setId(maxId + 1);
         departments.add(department);
-        XmlUtilsDataUpdater.updateDepartments(departments);
+        Department.updateChoosingFile(fileType, departments);
         return true;
     }
 
     @Override
-    public void removeAll() {
-        XmlUtilsDataUpdater.updateDepartments(new ArrayList<Department>());
+    public void removeAll(boolean fileType) {
+        Department.updateChoosingFile(fileType, new ArrayList<>());
     }
 
     @Override
-    public boolean removeById(int id) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+    public boolean removeById(boolean fileType, int id) {
+        List<Department> departments = Department.chooseFile(fileType);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getId() == id);
         if (departments.size() != count) {
-            XmlUtilsDataUpdater.updateDepartments(departments);
+            Department.updateChoosingFile(fileType, departments);
             return true;
         } else {
             return false;
@@ -51,12 +53,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
 
 
     @Override
-    public boolean removeByName(String name) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+    public boolean removeByName(boolean fileType, String name) {
+        List<Department> departments = Department.chooseFile(fileType);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getName().equals(name));
         if (departments.size() != count) {
-            XmlUtilsDataUpdater.updateDepartments(departments);
+            Department.updateChoosingFile(fileType, departments);
             return true;
         } else {
             return false;
@@ -64,38 +66,38 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
     }
 
     @Override
-    public boolean removeByChiefId(int chiefId) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+    public boolean removeByChiefId(boolean fileType, int chiefId) {
+        List<Department> departments = Department.chooseFile(fileType);
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
-            XmlUtilsDataUpdater.updateDepartments(departments);
+            Department.updateChoosingFile(fileType, departments);
             return true;
         } else {
             return false;
         }
     }
     @Override
-    public String updateAll(){
-        return updateXml((dep) -> true);
+    public String updateAll(boolean fileType){
+        return updater(fileType, (dep) -> true);
     }
     @Override
-    public String updateID(int id){
-        return updateXml((dep) -> dep.getId() == id);
+    public String updateID(boolean fileType, int id){
+        return updater(fileType, (dep) -> dep.getId() == id);
     }
     @Override
-    public String updateName(String name) {
-        return updateXml((dep) -> dep.getName().equals(name));
-    }
-
-    @Override
-    public String updateChiefId(int chiefId) {
-        return updateXml((dep) -> dep.getChiefId() == chiefId);
+    public String updateName(boolean fileType, String name) {
+        return updater(fileType, (dep) -> dep.getName().equals(name));
     }
 
     @Override
-    public Department showById(int id) {
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+    public String updateChiefId(boolean fileType, int chiefId) {
+        return updater(fileType, (dep) -> dep.getChiefId() == chiefId);
+    }
+
+    @Override
+    public Department showById(boolean fileType, int id) {
+        List<Department> departments =Department.chooseFile(fileType);
         for (Department dep : departments) {
             if (dep.getId() == id) {
                 return dep;
@@ -105,43 +107,43 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
     }
 
     @Override
-    public List<Department> showAll() {
-        return XmlUtilsDataExtractor.extractDepartments(filepath);
+    public List<Department> showAll(boolean fileType) {
+        return Department.chooseFile(fileType);
     }
 
     @Override
-    public List<Department> showByName(String name) {
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
+    public List<Department> showByName(boolean fileType, String name) {
+        return showDepartment(Department.chooseFile(fileType),
                 (dep) -> dep.getName().equals(name));
     }
 
     @Override
-    public List<Department> showByChiefId(int chiefId) {
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
+    public List<Department> showByChiefId(boolean fileType, int chiefId) {
+        return showDepartment(Department.chooseFile(fileType),
                 (dep) -> dep.getChiefId() == chiefId);
     }
 
     @Override
-    public List<Department> showByIdTemplate(String id) {
+    public List<Department> showByIdTemplate(boolean fileType, String id) {
         String strId = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
+        return showDepartment(Department.chooseFile(fileType),
                 (dep) -> String.valueOf(dep.getId()).matches(strId));
     }
 
     @Override
-    public List<Department> showByNameTemplate(String name) {
+    public List<Department> showByNameTemplate(boolean fileType, String name) {
         String argument = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
+        return showDepartment(Department.chooseFile(fileType),
                 (dep) -> dep.getName().matches(argument));
     }
 
     @Override
-    public List<Department> showByChiefIdTemplate(String chiefId) {
+    public List<Department> showByChiefIdTemplate(boolean fileType, String chiefId) {
         String strId = chiefId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(XmlUtilsDataExtractor.extractDepartments(filepath),
+        return showDepartment(Department.chooseFile(fileType),
                 (dep) -> String.valueOf(dep.getChiefId()).matches(strId));
     }
 
@@ -149,6 +151,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
         for (int i = 0; i < departments.size(); i++) {
             if (condition.test(departments.get(i))) {
                 departments.remove(i);
+                i = -1;
             }
         }
         return departments;
@@ -163,9 +166,9 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
         }
         return result;
     }
-    private String updateXml(Predicate<Department> condition) {
+    private String updater(boolean fileType, Predicate<Department> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Department> departments = XmlUtilsDataExtractor.extractDepartments(filepath);
+        List<Department> departments = Department.chooseFile(fileType);
         for (String str : arguments) {
             String[] fieldValue = str.split("/");
             switch (fieldValue[0]){
@@ -192,7 +195,8 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.x
                     }
             }
         }
-        XmlUtilsDataUpdater.updateDepartments(departments);
-        return "departments update";
+        Department.updateChoosingFile(fileType, departments);
+        return "departments обновлены";
     }
+
 }

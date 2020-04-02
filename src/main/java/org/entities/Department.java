@@ -1,5 +1,10 @@
 package org.entities;
 
+import org.utils.JsonUtilsDataExtractor;
+import org.utils.JsonUtilsDataUpdater;
+import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -71,5 +76,19 @@ public class Department {
             sBDepartment.append(dep.toString());
         }
         return sBDepartment.toString();
+    }
+   public static List<Department> chooseFile(boolean fileType){
+        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
+        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json";
+        return fileType? XmlUtilsDataExtractor.extractDepartments(filepathXml):
+                JsonUtilsDataExtractor.extractDepartments(filepathJson);
+    }
+    public static void updateChoosingFile(boolean fileType, List<Department> departments){
+        if (fileType){
+            XmlUtilsDataUpdater.updateDepartments(departments);
+        }
+        else {
+            JsonUtilsDataUpdater.updateDepartments(departments);
+        }
     }
 }

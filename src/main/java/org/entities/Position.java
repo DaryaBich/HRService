@@ -1,5 +1,10 @@
 package org.entities;
 
+import org.utils.JsonUtilsDataExtractor;
+import org.utils.JsonUtilsDataUpdater;
+import org.utils.XmlUtilsDataExtractor;
+import org.utils.XmlUtilsDataUpdater;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -18,8 +23,8 @@ public class Position {
     public String toString() {
         return "Position: " +
                 " id = " + id +
-                " | name='" + name + '\'' +
-                " | salary=" + salary +
+                " | name ='" + name + '\'' +
+                " | salary = " + salary +
                 '\n';
     }
 
@@ -70,5 +75,19 @@ public class Position {
             sBPosition.append(pos.toString());
         }
         return sBPosition.toString();
+    }
+    public static List<Position> chooseFile(boolean fileType){
+        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
+        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json";
+        return fileType? XmlUtilsDataExtractor.extractPositions(filepathXml):
+                JsonUtilsDataExtractor.extractPositions(filepathJson);
+    }
+    public static void updateChoosingFile(boolean fileType, List<Position> positions){
+        if (fileType){
+            XmlUtilsDataUpdater.updatePositions(positions);
+        }
+        else {
+            JsonUtilsDataUpdater.updatePositions(positions);
+        }
     }
 }

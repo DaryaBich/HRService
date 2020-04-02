@@ -8,26 +8,30 @@ public class UpdateOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, DepartmentDao departmentDao) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
         if (parseCommands[2].equals("all")) {
-            return departmentDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+            return departmentDao.updateAll(equalFileType);
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return departmentDao.updateID(Integer.parseInt(parseCommands[3]));
+                        return departmentDao.updateID(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "name":
-                    return departmentDao.updateName(parseCommands[3]);
+                    return departmentDao.updateName(equalFileType, parseCommands[4]);
                 case "chiefId":
                     try {
-                        return departmentDao.updateChiefId(Integer.parseInt(parseCommands[3]));
+                        return departmentDao.updateChiefId(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";
@@ -36,40 +40,44 @@ public class UpdateOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, EmployeeDao employeeDao) {
-        if (parseCommands[2].equals("all")) {
-            return employeeDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
+        if (parseCommands[3].equals("all")) {
+            return employeeDao.updateAll(equalFileType);
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return employeeDao.updateId(Integer.parseInt(parseCommands[3]));
+                        return employeeDao.updateId(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "fio":
-                    return employeeDao.updateName(parseCommands[3]);
+                    return employeeDao.updateName(equalFileType, parseCommands[4]);
                 case "idDepartment":
                     try {
-                        return employeeDao.updateDepartment(Integer.parseInt(parseCommands[3]));
+                        return employeeDao.updateDepartment(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "phoneNumber":
-                    return employeeDao.updatePhoneNumber(parseCommands[3]);
+                    return employeeDao.updatePhoneNumber(equalFileType, parseCommands[4]);
                 case "seniority":
                     try {
-                        return employeeDao.updateSeniority(Integer.parseInt(parseCommands[3]));
+                        return employeeDao.updateSeniority(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "idPosition":
                     try {
-                        return employeeDao.updatePositionId(Integer.parseInt(parseCommands[3]));
+                        return employeeDao.updatePositionId(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";
@@ -78,26 +86,30 @@ public class UpdateOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, PositionDao positionDao) {
-        if (parseCommands[2].equals("all")) {
-            return positionDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
+        if (parseCommands[3].equals("all")) {
+            return positionDao.updateAll(equalFileType);
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return positionDao.updateId(Integer.parseInt(parseCommands[3]));
+                        return positionDao.updateId(equalFileType, Integer.parseInt(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "name":
-                    return positionDao.updateName(parseCommands[3]);
+                    return positionDao.updateName(equalFileType, parseCommands[4]);
                 case "salary":
                     try {
-                        return positionDao.updateSalary(Double.parseDouble(parseCommands[3]));
+                        return positionDao.updateSalary(equalFileType, Double.parseDouble(parseCommands[4]));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";

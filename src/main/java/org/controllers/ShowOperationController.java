@@ -8,27 +8,32 @@ import org.entities.Position;
 public class ShowOperationController implements OperationTypeController {
     @Override
     public String execute(String[] parseCommands, DepartmentDao departmentDao) {
-        if (parseCommands[2].equals("all")) {
-            return Department.listDepartmentsToString(departmentDao.showAll());
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
+        if (parseCommands[3].equals("all")) {
+            return Department.listDepartmentsToString(departmentDao.showAll(equalFileType));
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return (departmentDao.showById(Integer.parseInt(parseCommands[3]))).toString();
+                        return (departmentDao.showById(equalFileType, Integer.parseInt(parseCommands[4]))).toString();
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "name":
-                    return Department.listDepartmentsToString(departmentDao.showByName(parseCommands[3]));
+                    return Department.listDepartmentsToString(departmentDao.showByName(equalFileType,
+                            parseCommands[4]));
                 case "chiefId":
                     try {
-                        return Department.listDepartmentsToString(departmentDao.showByChiefId
-                                (Integer.parseInt(parseCommands[3])));
+                        return Department.listDepartmentsToString(departmentDao.showByChiefId(equalFileType,
+                                Integer.parseInt(parseCommands[4])));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";
@@ -37,43 +42,48 @@ public class ShowOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, EmployeeDao employeeDao) {
-        if (parseCommands[2].equals("all")) {
-            return Employee.listEmployeesToString(employeeDao.showAll());
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
+        if (parseCommands[3].equals("all")) {
+            return Employee.listEmployeesToString(employeeDao.showAll(equalFileType));
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return (employeeDao.showById(Integer.parseInt(parseCommands[3]))).toString();
+                        return (employeeDao.showById(equalFileType, Integer.parseInt(parseCommands[4]))).toString();
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "fio":
-                    return Employee.listEmployeesToString(employeeDao.showByName(parseCommands[3]));
+                    return Employee.listEmployeesToString(employeeDao.showByName(equalFileType, parseCommands[4]));
                 case "idDepartment":
                     try {
-                        return Employee.listEmployeesToString(employeeDao.showByDepartment
-                                (Integer.parseInt(parseCommands[3])));
+                        return Employee.listEmployeesToString(employeeDao.showByDepartment(equalFileType,
+                                Integer.parseInt(parseCommands[4])));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "phoneNumber":
-                    return Employee.listEmployeesToString(employeeDao.showByPhoneNumber(parseCommands[3]));
+                    return Employee.listEmployeesToString(employeeDao.showByPhoneNumber(equalFileType,
+                            parseCommands[4]));
                 case "seniority":
                     try {
-                        return Employee.listEmployeesToString(employeeDao.showBySeniority
-                                (Integer.parseInt(parseCommands[3])));
+                        return Employee.listEmployeesToString(employeeDao.showBySeniority(equalFileType,
+                                Integer.parseInt(parseCommands[4])));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "idPosition":
                     try {
-                        return Employee.listEmployeesToString(employeeDao.showByPositionId
-                                (Integer.parseInt(parseCommands[3])));
+                        return Employee.listEmployeesToString(employeeDao.showByPositionId(equalFileType,
+                                Integer.parseInt(parseCommands[4])));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";
@@ -82,27 +92,31 @@ public class ShowOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, PositionDao positionDao) {
-        if (parseCommands[2].equals("all")) {
-            return Position.listPositionsToString(positionDao.showAll());
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
+        boolean equalFileType = parseCommands[2].equals("xml");
+        if (!equalFileType && !parseCommands[2].equals("json")) {
+            return "\nТакой тип файлов не поддерживается";
+        }
+        if (parseCommands[3].equals("all")) {
+            return Position.listPositionsToString(positionDao.showAll(equalFileType));
+        } else if (parseCommands.length == 5) {
+            switch (parseCommands[3]) {
                 case "id":
                     try {
-                        return (positionDao.showById(Integer.parseInt(parseCommands[3]))).toString();
+                        return (positionDao.showById(equalFileType, Integer.parseInt(parseCommands[4]))).toString();
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 case "name":
-                    return Position.listPositionsToString(positionDao.showByName(parseCommands[3]));
+                    return Position.listPositionsToString(positionDao.showByName(equalFileType, parseCommands[4]));
                 case "salary":
                     try {
-                        return Position.listPositionsToString(positionDao.showBySalary
-                                (Double.parseDouble(parseCommands[3])));
+                        return Position.listPositionsToString(positionDao.showBySalary(equalFileType,
+                                Double.parseDouble(parseCommands[4])));
                     } catch (NumberFormatException e) {
                         return "\nНеверное значение";
                     }
                 default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
+                    return "\nПоле" + parseCommands[3] + " не существует";
             }
         } else {
             return "\nНедостаточно/много аргументов";
