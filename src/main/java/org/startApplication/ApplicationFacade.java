@@ -18,7 +18,7 @@ public class ApplicationFacade {
     private View view = new View();
 
     public void startApplication(String... args) {
-       view.instruction(); // вывод инструкции
+       View.instruction(); // вывод инструкции
         //start console
 //        String command = "show all employees";
 //        String result = controller.parse(command);
@@ -42,8 +42,8 @@ public class ApplicationFacade {
 //        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json";
 //        commands.add("add/employee/json/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
 //        commands.add("add/department/json/name/HR/chiefId/2");
-//        commands.add("add/position/json/name/middle/salary/48500.9");
-//
+        commands.add("add/position/json/name/middle/salary/48500.9");
+
 //        commands.add("add/employee/xml/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
 //        commands.add("add from file/position/xml/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json");
 //        commands.add("add from file/department/xml/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\department.json");
@@ -59,8 +59,8 @@ public class ApplicationFacade {
 //        commands.add("remove/position/json/all");
 //        commands.add("update/position/xml/id/1");
 //        commands.add("update/department/xml/id/4");
-
-
+//
+//
 //        commands.add("add/employee/json/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
 //        commands.add("add/employee/json/fio/Николай/idDepartment/2/phoneNumber/892779/seniority/4/idPosition/2");
 //        commands.add("add/employee/json/fio/Святослав/idDepartment/2/phoneNumber/762799/seniority/6/idPosition/3");
@@ -72,7 +72,7 @@ public class ApplicationFacade {
 //        commands.add("show by template/employee/xml/fio/В*");
 //        commands.add("show by template/employee/xml/idDepartment/1*");
 //        commands.add("add from file/department/xml/C:\\\\Users\\\\Darya\\\\Desktop\\\\Java\\\\HRApp\\\\departments.json");
-        commands.add("update/employee/xml/idDepartment/1");
+//        commands.add("update/employee/xml/idDepartment/1");
         for (String s:commands ) {
             System.out.println(controller.parse(s));
         }
