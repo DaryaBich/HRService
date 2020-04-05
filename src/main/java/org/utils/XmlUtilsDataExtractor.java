@@ -27,7 +27,7 @@ public class XmlUtilsDataExtractor {
             document.getDocumentElement().normalize();
             NodeList nodeList = document.getElementsByTagName("employee");
             List<Employee> employees = new ArrayList<Employee>();
-            for (int i = 1; i < nodeList.getLength(); i++) {
+            for (int i = 0; i < nodeList.getLength(); i++) {
                 employees.add(getEmployeeXmlToObject(nodeList.item(i)));
             }
             return employees;

@@ -3,10 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/DataSource.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/Application.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationContext.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/dao/DataAccessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/org/Application.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/org/ApplicationContext.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/org/ApplicationFacade.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/org/dao/DataAccessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/departments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/departments.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employees.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employees.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/positions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/positions.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" afterDir="false" />
@@ -23,7 +29,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/Application.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/ApplicationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/JsonUtilsDataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/utils/JsonUtilsDataUpdater.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java" afterDir="false" />
@@ -143,7 +149,7 @@
       <workItem from="1585837438776" duration="19000" />
       <workItem from="1585909061905" duration="1030000" />
       <workItem from="1585911260121" duration="21000" />
-      <workItem from="1586110479079" duration="7808000" />
+      <workItem from="1586110479079" duration="8089000" />
     </task>
     <task id="LOCAL-00001" summary="add controllerCommands">
       <created>1585317349177</created>
