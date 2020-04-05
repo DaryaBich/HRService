@@ -1,11 +1,7 @@
 package org.dao;
 
+import org.ApplicationContext;
 import org.entities.Department;
-import org.entities.Position;
-import org.utils.JsonUtilsDataExtractor;
-import org.utils.JsonUtilsDataUpdater;
-import org.utils.XmlUtilsDataExtractor;
-import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -15,8 +11,8 @@ import java.util.function.Predicate;
 public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     // вводить
-    public boolean addDepartment(boolean fileType, String name, int chiefIdEmployee) {
-        List<Department> departments = Department.chooseFile(fileType);
+    public boolean addDepartment(String name, int chiefIdEmployee) {
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         Department department = new Department(departments.size() + 1, name, chiefIdEmployee);
         int maxId = departments.size() + 1;
         for (Department dep : departments) {
@@ -29,22 +25,22 @@ public class DepartmentDaoImpl implements DepartmentDao {
         }
         department.setId(maxId + 1);
         departments.add(department);
-        Department.updateChoosingFile(fileType, departments);
+        ApplicationContext.getDataAccessor().updateDepartments(departments);
         return true;
     }
 
     @Override
-    public void removeAll(boolean fileType) {
-        Department.updateChoosingFile(fileType, new ArrayList<>());
+    public void removeAll() {
+        ApplicationContext.getDataAccessor().updateDepartments(new ArrayList<>());
     }
 
     @Override
-    public boolean removeById(boolean fileType, int id) {
-        List<Department> departments = Department.chooseFile(fileType);
+    public boolean removeById(int id) {
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getId() == id);
         if (departments.size() != count) {
-            Department.updateChoosingFile(fileType, departments);
+            ApplicationContext.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -53,12 +49,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
 
     @Override
-    public boolean removeByName(boolean fileType, String name) {
-        List<Department> departments = Department.chooseFile(fileType);
+    public boolean removeByName( String name) {
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getName().equals(name));
         if (departments.size() != count) {
-            Department.updateChoosingFile(fileType, departments);
+            ApplicationContext.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -66,38 +62,38 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public boolean removeByChiefId(boolean fileType, int chiefId) {
-        List<Department> departments = Department.chooseFile(fileType);
+    public boolean removeByChiefId(int chiefId) {
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
-            Department.updateChoosingFile(fileType, departments);
+            ApplicationContext.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
         }
     }
     @Override
-    public String updateAll(boolean fileType){
-        return updater(fileType, (dep) -> true);
+    public String updateAll(){
+        return updater((dep) -> true);
     }
     @Override
-    public String updateID(boolean fileType, int id){
-        return updater(fileType, (dep) -> dep.getId() == id);
+    public String updateID(int id){
+        return updater((dep) -> dep.getId() == id);
     }
     @Override
-    public String updateName(boolean fileType, String name) {
-        return updater(fileType, (dep) -> dep.getName().equals(name));
-    }
-
-    @Override
-    public String updateChiefId(boolean fileType, int chiefId) {
-        return updater(fileType, (dep) -> dep.getChiefId() == chiefId);
+    public String updateName(String name) {
+        return updater((dep) -> dep.getName().equals(name));
     }
 
     @Override
-    public Department showById(boolean fileType, int id) {
-        List<Department> departments =Department.chooseFile(fileType);
+    public String updateChiefId(int chiefId) {
+        return updater((dep) -> dep.getChiefId() == chiefId);
+    }
+
+    @Override
+    public Department showById(int id) {
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         for (Department dep : departments) {
             if (dep.getId() == id) {
                 return dep;
@@ -107,43 +103,43 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public List<Department> showAll(boolean fileType) {
-        return Department.chooseFile(fileType);
+    public List<Department> showAll() {
+        return ApplicationContext.getDataAccessor().extractDepartments();
     }
 
     @Override
-    public List<Department> showByName(boolean fileType, String name) {
-        return showDepartment(Department.chooseFile(fileType),
+    public List<Department> showByName(String name) {
+        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getName().equals(name));
     }
 
     @Override
-    public List<Department> showByChiefId(boolean fileType, int chiefId) {
-        return showDepartment(Department.chooseFile(fileType),
+    public List<Department> showByChiefId(int chiefId) {
+        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getChiefId() == chiefId);
     }
 
     @Override
-    public List<Department> showByIdTemplate(boolean fileType, String id) {
+    public List<Department> showByIdTemplate(String id) {
         String strId = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(Department.chooseFile(fileType),
+        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
                 (dep) -> String.valueOf(dep.getId()).matches(strId));
     }
 
     @Override
-    public List<Department> showByNameTemplate(boolean fileType, String name) {
+    public List<Department> showByNameTemplate(String name) {
         String argument = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showDepartment(Department.chooseFile(fileType),
+        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getName().matches(argument));
     }
 
     @Override
-    public List<Department> showByChiefIdTemplate(boolean fileType, String chiefId) {
+    public List<Department> showByChiefIdTemplate(String chiefId) {
         String strId = chiefId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(Department.chooseFile(fileType),
+        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
                 (dep) -> String.valueOf(dep.getChiefId()).matches(strId));
     }
 
@@ -166,9 +162,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
         }
         return result;
     }
-    private String updater(boolean fileType, Predicate<Department> condition) {
+    private String updater(Predicate<Department> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Department> departments = Department.chooseFile(fileType);
+        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
         for (String str : arguments) {
             String[] fieldValue = str.split("/");
             switch (fieldValue[0]){
@@ -195,7 +191,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                     }
             }
         }
-        Department.updateChoosingFile(fileType, departments);
+        ApplicationContext.getDataAccessor().updateDepartments(departments);
         return "departments обновлены";
     }
 

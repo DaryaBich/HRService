@@ -1,10 +1,7 @@
 package org.dao;
 
+import org.ApplicationContext;
 import org.entities.Employee;
-import org.utils.JsonUtilsDataExtractor;
-import org.utils.JsonUtilsDataUpdater;
-import org.utils.XmlUtilsDataExtractor;
-import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -14,9 +11,8 @@ import java.util.function.Predicate;
 
 public class EmployeeDaoImpl implements EmployeeDao {
     @Override
-    public boolean addEmployee(boolean fileType, String FIO, int idDepartment, String phoneNumber, int seniority,
-                               int position) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean addEmployee(String FIO, int idDepartment, String phoneNumber, int seniority, int position) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int maxId = employees.size() + 1;
         Employee employee = new Employee(employees.size() + 1, FIO, idDepartment, phoneNumber, seniority, position);
         for (Employee emp : employees) {
@@ -29,22 +25,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         employee.setId(maxId + 1);
         employees.add(employee);
-        Employee.updateChoosingFile(fileType, employees);
+        ApplicationContext.getDataAccessor().updateEmployees(employees);
         return true;
     }
 
     @Override
-    public void removeAll(boolean fileType) {
-        Employee.updateChoosingFile(fileType, new ArrayList<Employee>());
+    public void removeAll() {
+        ApplicationContext.getDataAccessor().updateEmployees(new ArrayList<>());
     }
 
     @Override
-    public boolean removeById(boolean fileType, int id) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeById( int id) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getId() == id);
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -52,12 +48,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean removeByName(boolean fileType, String Name) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeByName(String Name) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getFIO().equals(Name));
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -65,12 +61,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean removeByDepartmentId(boolean fileType, int idDepartment) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeByDepartmentId(int idDepartment) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdDepartment() == idDepartment);
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -78,12 +74,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean removeByPhoneNumber(boolean fileType, String phoneNumber) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeByPhoneNumber(String phoneNumber) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getPhoneNumber().equals(phoneNumber));
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -91,12 +87,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean removeBySeniority(boolean fileType, int seniority) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeBySeniority(int seniority) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getSeniority() == seniority);
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -104,12 +100,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean removeByPositionId(boolean fileType, int positionId) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public boolean removeByPositionId(int positionId) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdPosition() == positionId);
         if (count != employees.size()) {
-            Employee.updateChoosingFile(fileType, employees);
+            ApplicationContext.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -117,43 +113,43 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public String updateAll(boolean fileType) {
-        return updater(dep -> true,fileType);
+    public String updateAll() {
+        return updater(dep -> true);
     }
 
     @Override
-    public String updateId(boolean fileType, int id) {
-        return updater(dep -> dep.getId() == id, fileType);
+    public String updateId(int id) {
+        return updater(dep -> dep.getId() == id);
     }
 
     @Override
-    public String updateName(boolean fileType, String FIO) {
-        return updater((emp) -> emp.getFIO().equals(FIO), fileType);
+    public String updateName(String FIO) {
+        return updater((emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
-    public String updateDepartment(boolean fileType, int idDepartment) {
-        return updater((emp) -> emp.getIdDepartment() == idDepartment, fileType);
+    public String updateDepartment(int idDepartment) {
+        return updater((emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
-    public String updatePhoneNumber(boolean fileType, String phoneNumber) {
-        return updater((emp) -> emp.getPhoneNumber().equals(phoneNumber), fileType);
+    public String updatePhoneNumber(String phoneNumber) {
+        return updater((emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
-    public String updateSeniority(boolean fileType, int seniority) {
-        return updater((emp) -> emp.getSeniority() == seniority, fileType);
+    public String updateSeniority(int seniority) {
+        return updater((emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
-    public String updatePositionId(boolean fileType, int positionId) {
-        return updater((emp) -> emp.getIdPosition() == positionId, fileType);
+    public String updatePositionId(int positionId) {
+        return updater((emp) -> emp.getIdPosition() == positionId);
     }
 
     @Override
-    public Employee showById(boolean fileType, int id) {
-        List<Employee> employees = Employee.chooseFile(fileType);
+    public Employee showById(int id) {
+        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
         for (Employee emp : employees) {
             if (emp.getId() == id) {
                 return emp;
@@ -163,79 +159,86 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> showAll(boolean fileType) {
-        return Employee.chooseFile(fileType);
+    public List<Employee> showAll() {
+        return ApplicationContext.getDataAccessor().extractEmployees();
     }
 
     @Override
-    public List<Employee> showByName(boolean fileType, String FIO) {
-        return removeEmployee(Employee.chooseFile(fileType),
+    public List<Employee> showByName(String FIO) {
+        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
-    public List<Employee> showByDepartment(boolean fileType, int idDepartment) {
-        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getIdDepartment() == idDepartment);
+    public List<Employee> showByDepartment(int idDepartment) {
+        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
-    public List<Employee> showByPhoneNumber(boolean fileType, String phoneNumber) {
-        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getPhoneNumber().equals(phoneNumber));
+    public List<Employee> showByPhoneNumber(String phoneNumber) {
+        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
-    public List<Employee> showBySeniority(boolean fileType, int seniority) {
-        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getSeniority() == seniority);
+    public List<Employee> showBySeniority(int seniority) {
+        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
-    public List<Employee> showByPositionId(boolean fileType, int positionId) {
-        return removeEmployee(Employee.chooseFile(fileType), (emp) -> emp.getIdPosition() == positionId);
+    public List<Employee> showByPositionId(int positionId) {
+        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getIdPosition() == positionId);
     }
 
     @Override
-    public List<Employee> showByIdTemplate(boolean fileType, String id) {
+    public List<Employee> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(Employee.chooseFile(fileType), (emp) -> String.valueOf(emp.getId()).matches(template));
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> String.valueOf(emp.getId()).matches(template));
     }
 
 
     @Override
-    public List<Employee> showByNameTemplate(boolean fileType, String FIO) {
+    public List<Employee> showByNameTemplate(String FIO) {
         String template = FIO.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showEmployee(Employee.chooseFile(fileType), (emp) -> emp.getFIO().matches(template));
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getFIO().matches(template));
     }
 
     @Override
-    public List<Employee> showByDepartmentTemplate(boolean fileType, String idDepartment) {
+    public List<Employee> showByDepartmentTemplate(String idDepartment) {
         String template = idDepartment.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(Employee.chooseFile(fileType),
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getIdDepartment()).matches(template));
     }
 
     @Override
-    public List<Employee> showByPhoneNumberTemplate(boolean fileType, String phoneNumber) {
+    public List<Employee> showByPhoneNumberTemplate(String phoneNumber) {
         String template = phoneNumber.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(Employee.chooseFile(fileType), (emp) -> emp.getPhoneNumber().matches(template));
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+                (emp) -> emp.getPhoneNumber().matches(template));
     }
 
     @Override
-    public List<Employee> showBySeniorityTemplate(boolean fileType, String seniority) {
+    public List<Employee> showBySeniorityTemplate(String seniority) {
         String template = seniority.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(Employee.chooseFile(fileType),
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getSeniority()).matches(template));
     }
 
     @Override
-    public List<Employee> showByPositionIdTemplate(boolean fileType, String positionId) {
+    public List<Employee> showByPositionIdTemplate(String positionId) {
         String template = positionId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(Employee.chooseFile(fileType),
+        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getIdPosition()).matches(template));
     }
 
@@ -259,9 +262,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return result;
     }
 
-    private String updater(Predicate<Employee> condition, boolean fileType) {
+    private String updater(Predicate<Employee> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Employee> employeeList = Employee.chooseFile(fileType);
+        List<Employee> employeeList = ApplicationContext.getDataAccessor().extractEmployees();
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {
@@ -303,7 +306,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                     }
             }
         }
-        Employee.updateChoosingFile(fileType, employeeList);
+        ApplicationContext.getDataAccessor().updateEmployees(employeeList);
         return "departments update";
     }
 

@@ -117,19 +117,5 @@ public class Employee {
         }
         return sBEmployee.toString();
     }
-    public static List<Employee> chooseFile(boolean fileType){
-        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml";
-        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.json";
-        return fileType? XmlUtilsDataExtractor.extractEmployees(filepathXml):
-                JsonUtilsDataExtractor.extractEmployees(filepathJson);
-    }
-    public static void updateChoosingFile(boolean fileType, List<Employee> employees){
-        if (fileType){
-            XmlUtilsDataUpdater.updateEmployees(employees);
-        }
-        else {
-            JsonUtilsDataUpdater.updateEmployees(employees);
-        }
-    }
 
 }

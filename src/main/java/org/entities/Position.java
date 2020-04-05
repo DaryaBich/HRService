@@ -76,18 +76,4 @@ public class Position {
         }
         return sBPosition.toString();
     }
-    public static List<Position> chooseFile(boolean fileType){
-        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
-        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json";
-        return fileType? XmlUtilsDataExtractor.extractPositions(filepathXml):
-                JsonUtilsDataExtractor.extractPositions(filepathJson);
-    }
-    public static void updateChoosingFile(boolean fileType, List<Position> positions){
-        if (fileType){
-            XmlUtilsDataUpdater.updatePositions(positions);
-        }
-        else {
-            JsonUtilsDataUpdater.updatePositions(positions);
-        }
-    }
 }

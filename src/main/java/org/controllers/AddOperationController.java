@@ -3,25 +3,22 @@ package org.controllers;
 import org.dao.*;
 
 public class AddOperationController implements OperationTypeController {
+    // add/department/name/.../chiefId/...
     @Override
     public String execute(String[] parseCommands, DepartmentDao departmentDao) {
-        boolean equalFileType = parseCommands[2].equals("xml");
-        if (!equalFileType && !parseCommands[2].equals("json")) {
-            return "\nТакой тип файлов не поддерживается";
-        }
-        if (parseCommands.length != 7) {
+        if (parseCommands.length != 6) {
             return "\nНедостаточно аргументов";
         }
         String name = "", chiefId = "";
-        if (parseCommands[3].equalsIgnoreCase("name")) {
-            name = parseCommands[4];
-            chiefId = parseCommands[6];
+        if (parseCommands[2].equalsIgnoreCase("name")) {
+            name = parseCommands[3];
+            chiefId = parseCommands[5];
         } else {
-            name = parseCommands[6];
-            chiefId = parseCommands[4];
+            name = parseCommands[5];
+            chiefId = parseCommands[3];
         }
         try {
-            if (departmentDao.addDepartment(equalFileType, name, Integer.parseInt(chiefId))) {
+            if (departmentDao.addDepartment(name, Integer.parseInt(chiefId))) {
                 return "\nDepartment успешно добавлен";
             } else {
                 return "\nDepartment уже существует";
@@ -33,15 +30,11 @@ public class AddOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, EmployeeDao employeeDao) {
-        boolean equalFileType = parseCommands[2].equals("xml");
-        if (!equalFileType && !parseCommands[2].equals("json")) {
-            return "\nТакой тип файлов не поддерживается";
-        }
-        if (parseCommands.length != 13) {
+        if (parseCommands.length != 12) {
             return "\nНедостаточно аргументов";
         }
         String fio = "", idDeparment = "", phoneNumber = "", seniority = "", position = "";
-        for (int i = 3; i < parseCommands.length; i += 2) {
+        for (int i = 2; i < parseCommands.length; i += 2) {
             switch (parseCommands[i]) {
                 case "fio":
                     fio = parseCommands[i + 1];
@@ -63,8 +56,8 @@ public class AddOperationController implements OperationTypeController {
             }
         }
         try {
-            if (employeeDao.addEmployee(equalFileType, fio, Integer.parseInt(idDeparment),
-                    phoneNumber, Integer.parseInt(seniority), Integer.parseInt(position))) {
+            if (employeeDao.addEmployee(fio, Integer.parseInt(idDeparment), phoneNumber, Integer.parseInt(seniority),
+                    Integer.parseInt(position))) {
                 return "\nEmployee успешно добавлен";
             } else {
                 return "\nEmployee уже существует";
@@ -76,23 +69,19 @@ public class AddOperationController implements OperationTypeController {
 
     @Override
     public String execute(String[] parseCommands, PositionDao positionDao) {
-        boolean equalFileType = parseCommands[2].equals("xml");
-        if (!equalFileType && !parseCommands[2].equals("json")) {
-            return "\nТакой тип файлов не поддерживается";
-        }
-        if (parseCommands.length != 7) {
+        if (parseCommands.length != 6) {
             return "\nНедостаточно аргументов";
         }
         String name = "", salary = "";
-        if (parseCommands[3].equalsIgnoreCase("name")) {
-            name = parseCommands[4];
-            salary = parseCommands[6];
+        if (parseCommands[2].equalsIgnoreCase("name")) {
+            name = parseCommands[3];
+            salary = parseCommands[5];
         } else {
-            name = parseCommands[6];
-            salary = parseCommands[4];
+            name = parseCommands[5];
+            salary = parseCommands[3];
         }
         try {
-            if (positionDao.addPosition(equalFileType, name, Double.parseDouble(salary))) {
+            if (positionDao.addPosition(name, Double.parseDouble(salary))) {
                 return "\nPosition успешно добавлен";
             } else {
                 return "\nPosition уже существует";

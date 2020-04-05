@@ -77,18 +77,4 @@ public class Department {
         }
         return sBDepartment.toString();
     }
-   public static List<Department> chooseFile(boolean fileType){
-        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
-        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json";
-        return fileType? XmlUtilsDataExtractor.extractDepartments(filepathXml):
-                JsonUtilsDataExtractor.extractDepartments(filepathJson);
-    }
-    public static void updateChoosingFile(boolean fileType, List<Department> departments){
-        if (fileType){
-            XmlUtilsDataUpdater.updateDepartments(departments);
-        }
-        else {
-            JsonUtilsDataUpdater.updateDepartments(departments);
-        }
-    }
 }

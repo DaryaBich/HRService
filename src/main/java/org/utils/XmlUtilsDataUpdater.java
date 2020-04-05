@@ -18,15 +18,14 @@ import java.io.File;
 import java.util.List;
 
 public class XmlUtilsDataUpdater {
-    public static void updateEmployees(List<Employee> employees) {
+    public static void updateEmployees(List<Employee> employees, String filepath) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
             Document doc = builder.newDocument();
             Element rootElement =
-                    doc.createElementNS("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml",
-                            "employees");
+                    doc.createElementNS(filepath, "employees");
             doc.appendChild(rootElement);
             for (Employee emp : employees) {
                 rootElement.appendChild(getEmployee(doc, emp));
@@ -36,7 +35,7 @@ public class XmlUtilsDataUpdater {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult file =
-                    new StreamResult(new File("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.xml"));
+                    new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +54,7 @@ public class XmlUtilsDataUpdater {
     }
 
 
-    public static void updateDepartments(List<Department> departments) {
+    public static void updateDepartments(List<Department> departments, String filepath) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -63,8 +62,7 @@ public class XmlUtilsDataUpdater {
 
             Document doc = builder.newDocument();
             Element rootElement =
-                    doc.createElementNS("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml",
-                            "department");
+                    doc.createElementNS(filepath, "departments");
             doc.appendChild(rootElement);
             for (Department department : departments) {
                 rootElement.appendChild(getDepartment(doc, department));
@@ -74,7 +72,7 @@ public class XmlUtilsDataUpdater {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult file =
-                    new StreamResult(new File("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml"));
+                    new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +87,7 @@ public class XmlUtilsDataUpdater {
         return element;
     }
 
-    public static void updatePositions(List<Position> positions) {
+    public static void updatePositions(List<Position> positions, String filepath) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -97,8 +95,7 @@ public class XmlUtilsDataUpdater {
 
             Document doc = builder.newDocument();
             Element rootElement =
-                    doc.createElementNS("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml",
-                            "position");
+                    doc.createElementNS(filepath,"positions");
             doc.appendChild(rootElement);
             for (Position position : positions) {
                 rootElement.appendChild(getPosition(doc, position));
@@ -108,7 +105,7 @@ public class XmlUtilsDataUpdater {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult file =
-                    new StreamResult(new File("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml"));
+                    new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
             e.printStackTrace();

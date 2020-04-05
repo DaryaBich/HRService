@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<position xmlns="C:\Users\Darya\Desktop\Java\HRApp\positions.xml">
+<positions xmlns="C:\Users\Darya\Desktop\Java\HRApp\positions.xml">
     <position>
         <id>1</id>
         <name>Коля</name>
@@ -10,4 +10,9 @@
         <name>middle</name>
         <salary>70.8</salary>
     </position>
-</position>
+    <position>
+        <id>5</id>
+        <name>middle</name>
+        <salary>48500.9</salary>
+    </position>
+</positions>

@@ -13,11 +13,11 @@ import java.util.List;
 
 
 public class JsonUtilsDataUpdater {
-    public static void updateEmployees(List<Employee> employees){
+    public static void updateEmployees(List<Employee> employees, String filepath){
         Gson gson = new Gson(); //Create a Gson object
         try
         {
-            FileWriter fileWriter = new FileWriter("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.json");
+            FileWriter fileWriter = new FileWriter(filepath);
             for (Employee employee:employees) {
                 fileWriter.write(gson.toJson(employee));
             }
@@ -26,10 +26,10 @@ public class JsonUtilsDataUpdater {
             System.out.println("Файл не найден");
         }
     }
-    public static void updateDepartments(List<Department> departments) {
+    public static void updateDepartments(List<Department> departments, String filepath) {
         Gson gson = new Gson(); //Create a Gson object
         try {
-            FileWriter fileWriter = new FileWriter("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json");
+            FileWriter fileWriter = new FileWriter(filepath);
             for (Department department:departments) {
                 fileWriter.write(gson.toJson(department));
             }
@@ -38,10 +38,10 @@ public class JsonUtilsDataUpdater {
             System.out.println("Файл не найден");
         }
     }
-    public static void updatePositions(List<Position> positions) {
+    public static void updatePositions(List<Position> positions, String filepath) {
         Gson gson = new Gson(); //Create a Gson object
         try {
-            FileWriter fileWriter = new FileWriter("C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json");
+            FileWriter fileWriter = new FileWriter(filepath);
             for (Position position:positions) {
                 fileWriter.write(gson.toJson(position));
             }

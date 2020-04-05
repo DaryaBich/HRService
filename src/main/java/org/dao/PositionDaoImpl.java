@@ -1,11 +1,7 @@
 package org.dao;
 
-import org.entities.Employee;
+import org.ApplicationContext;
 import org.entities.Position;
-import org.utils.JsonUtilsDataExtractor;
-import org.utils.JsonUtilsDataUpdater;
-import org.utils.XmlUtilsDataExtractor;
-import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
@@ -16,8 +12,8 @@ import java.util.function.Predicate;
 public class PositionDaoImpl implements PositionDao {
 private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
     @Override
-    public boolean addPosition(boolean fileType, String name, double salary) {
-        List<Position> positions = Position.chooseFile(fileType);
+    public boolean addPosition(String name, double salary) {
+        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
         int maxId = positions.size() + 1;
         Position position = new Position(positions.size() + 1, name, salary);
         for (Position pos : positions) {
@@ -30,22 +26,22 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
         }
         position.setId(maxId + 1);
         positions.add(position);
-        Position.updateChoosingFile(fileType, positions);
+        ApplicationContext.getDataAccessor().updatePositions(positions);
         return true;
     }
 
     @Override
-    public void removeAll(boolean fileType) {
-        Position.updateChoosingFile(fileType, new ArrayList<>());
+    public void removeAll() {
+        ApplicationContext.getDataAccessor().updatePositions(new ArrayList<>());
     }
 
     @Override
-    public boolean removeById(boolean fileType, int id) {
-        List<Position> positions = Position.chooseFile(fileType);
+    public boolean removeById(int id) {
+        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getId() == id);
         if (count != positions.size()) {
-            Position.updateChoosingFile(fileType, positions);
+            ApplicationContext.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -53,12 +49,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     }
 
     @Override
-    public boolean removeByName(boolean fileType, String name) {
-        List<Position> positions = Position.chooseFile(fileType);
+    public boolean removeByName(String name) {
+        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getName().equals(name));
         if (count != positions.size()) {
-            Position.updateChoosingFile(fileType, positions);
+            ApplicationContext.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -66,12 +62,12 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     }
 
     @Override
-    public boolean removeBySalary(boolean fileType, double salary) {
-        List<Position> positions = Position.chooseFile(fileType);
+    public boolean removeBySalary(double salary) {
+        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getSalary() == salary);
         if (count != positions.size()) {
-            Position.updateChoosingFile(fileType, positions);
+            ApplicationContext.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -79,28 +75,28 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     }
 
     @Override
-    public String updateAll(boolean fileType) {
-        return updater(fileType, dep -> true);
+    public String updateAll() {
+        return updater(dep -> true);
     }
 
     @Override
-    public String updateId(boolean fileType, int id) {
-        return updater(fileType, pos -> pos.getId() == id);
+    public String updateId(int id) {
+        return updater(pos -> pos.getId() == id);
     }
 
     @Override
-    public String updateName(boolean fileType, String name) {
-        return updater(fileType, pos -> pos.getName().equals(name));
+    public String updateName(String name) {
+        return updater(pos -> pos.getName().equals(name));
     }
 
     @Override
-    public String updateSalary(boolean fileType, double salary) {
-        return updater(fileType, pos -> pos.getSalary() == salary);
+    public String updateSalary(double salary) {
+        return updater(pos -> pos.getSalary() == salary);
     }
 
     @Override
-    public Position showById(boolean fileType, int id) {
-        List<Position> positions = Position.chooseFile(fileType);
+    public Position showById(int id) {
+        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
         for (Position pos : positions) {
             if (pos.getId() == id) {
                 return pos;
@@ -110,43 +106,43 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     }
 
     @Override
-    public List<Position> showAll(boolean fileType) {
-        return Position.chooseFile(fileType);
+    public List<Position> showAll() {
+        return ApplicationContext.getDataAccessor().extractPositions();
     }
 
     @Override
-    public List<Position> showByName(boolean fileType, String name) {
-        return removePosition(Position.chooseFile(fileType),
+    public List<Position> showByName(String name) {
+        return removePosition(ApplicationContext.getDataAccessor().extractPositions(),
                 (pos) -> pos.getName().equals(name));
     }
 
     @Override
-    public List<Position> showBySalary(boolean fileType, double salary) {
-        return removePosition(Position.chooseFile(fileType),
+    public List<Position> showBySalary(double salary) {
+        return removePosition(ApplicationContext.getDataAccessor().extractPositions(),
                 (pos) -> pos.getSalary() == salary);
     }
 
     @Override
-    public List<Position> showByIdTemplate(boolean fileType, String id) {
+    public List<Position> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(Position.chooseFile(fileType),
+        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
                 (pos) -> String.valueOf(pos.getId()).matches(template));
     }
 
     @Override
-    public List<Position> showByNameTemplate(boolean fileType, String name) {
+    public List<Position> showByNameTemplate(String name) {
         String template = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showPosition(Position.chooseFile(fileType),
+        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
                 (pos) -> pos.getName().matches(template));
     }
 
     @Override
-    public List<Position> showBySalaryTemplate(boolean fileType, String salary) {
+    public List<Position> showBySalaryTemplate(String salary) {
         String template = salary.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(Position.chooseFile(fileType),
+        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
                 (pos) -> String.valueOf(pos.getSalary()).matches(template));
     }
 
@@ -170,9 +166,9 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
         return positions;
     }
 
-    private String updater(boolean fileType, Predicate<Position> condition) {
+    private String updater(Predicate<Position> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Position> positions =  Position.chooseFile(fileType);
+        List<Position> positions =  ApplicationContext.getDataAccessor().extractPositions();
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {
@@ -191,7 +187,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
                     }
             }
         }
-        Position.updateChoosingFile(fileType, positions);
+        ApplicationContext.getDataAccessor().updatePositions(positions);
         return "departments update";
     }
 
