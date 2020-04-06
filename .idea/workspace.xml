@@ -2,58 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DataSource.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dao/DataAccessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/Application.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/ApplicationContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/ApplicationFacade.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/dao/DataAccessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/departments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/departments.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employees.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employees.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/positions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/positions.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/RemoveOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/RemoveOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/ShowByTemplateOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/ShowByTemplateOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/ShowOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/ShowOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/UpdateOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/UpdateOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/DepartmentDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/EmployeeDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/PositionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/PositionDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dao/PositionDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dao/PositionDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/startApplication/ApplicationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/JsonUtilsDataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/utils/JsonUtilsDataUpdater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataUpdater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/AddFromFileOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/AddFromFileOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/AddOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/AddOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/RemoveOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/RemoveOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/ShowByTemplateOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/ShowByTemplateOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/ShowOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/ShowOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/UpdateOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/UpdateOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/DepartmentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/DepartmentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/DepartmentDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/DepartmentDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/EmployeeDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/EmployeeDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/EmployeeDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/EmployeeDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/PositionDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/PositionDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dao/PositionDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dao/PositionDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Department.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/startApplication/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/startApplication/ApplicationFacade.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/utils/JsonUtilsDataUpdater.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/utils/JsonUtilsDataUpdater.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataExtractor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataUpdater.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataUpdater.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +100,8 @@
       <workItem from="1585837438776" duration="19000" />
       <workItem from="1585909061905" duration="1030000" />
       <workItem from="1585911260121" duration="21000" />
-      <workItem from="1586110479079" duration="8089000" />
+      <workItem from="1586110479079" duration="8377000" />
+      <workItem from="1586166964720" duration="720000" />
     </task>
     <task id="LOCAL-00001" summary="add controllerCommands">
       <created>1585317349177</created>
@@ -194,38 +146,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585224782420" />
-    <state width="746" height="202" key="GridCell.Tab.0.bottom" timestamp="1586118519289">
+    <state width="978" height="233" key="GridCell.Tab.0.bottom" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="202" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586118519289" />
-    <state width="746" height="202" key="GridCell.Tab.0.center" timestamp="1586118519285">
+    <state width="978" height="233" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.0.center" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="202" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586118519285" />
-    <state width="746" height="202" key="GridCell.Tab.0.left" timestamp="1586118519285">
+    <state width="978" height="233" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.0.left" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="202" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586118519285" />
-    <state width="746" height="202" key="GridCell.Tab.0.right" timestamp="1586118519289">
+    <state width="978" height="233" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.0.right" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="202" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586118519289" />
-    <state width="979" height="233" key="GridCell.Tab.1.bottom" timestamp="1586118447022">
+    <state width="978" height="233" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.1.bottom" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="979" height="233" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586118447022" />
-    <state width="979" height="233" key="GridCell.Tab.1.center" timestamp="1586118447022">
+    <state width="978" height="233" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.1.center" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="979" height="233" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586118447022" />
-    <state width="979" height="233" key="GridCell.Tab.1.left" timestamp="1586118447021">
+    <state width="978" height="233" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.1.left" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="979" height="233" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586118447021" />
-    <state width="979" height="233" key="GridCell.Tab.1.right" timestamp="1586118447022">
+    <state width="978" height="233" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
+    <state width="978" height="233" key="GridCell.Tab.1.right" timestamp="1586118869631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="979" height="233" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586118447022" />
+    <state width="978" height="233" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586118869631" />
     <state x="299" y="70" key="Maven.ArtifactSearchDialog" timestamp="1585824274991">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -238,10 +190,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585317355477" />
-    <state x="477" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1586110486932">
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1586166965015">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="477" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586110486932" />
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586166965015" />
     <state x="533" y="132" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1585648806356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -254,27 +206,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1585816181585" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/utils/XmlUtilsDataExtractor.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HRService$Application.ic" NAME="Application Coverage Results" MODIFIED="1586116973264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
