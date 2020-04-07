@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataExtractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/utils/XmlUtilsDataExtractor.class" afterDir="false" />
-    </list>
+    <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +97,7 @@
       <workItem from="1585909061905" duration="1030000" />
       <workItem from="1585911260121" duration="21000" />
       <workItem from="1586110479079" duration="8377000" />
-      <workItem from="1586166964720" duration="720000" />
+      <workItem from="1586166964720" duration="821000" />
     </task>
     <task id="LOCAL-00001" summary="add controllerCommands">
       <created>1585317349177</created>
