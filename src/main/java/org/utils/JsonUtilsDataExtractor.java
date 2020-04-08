@@ -30,10 +30,8 @@ public class JsonUtilsDataExtractor {
                 employees.add(employee);
                 line = line.substring(line.indexOf("}") + 1);
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Файл не найден");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
         return employees;
     }
@@ -57,10 +55,8 @@ public class JsonUtilsDataExtractor {
                 departments.add(department);
                 line = line.substring(line.indexOf("}") + 1);
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Файл не найден");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
         return departments;
     }
@@ -84,10 +80,8 @@ public class JsonUtilsDataExtractor {
                 positions.add(position);
                 line = line.substring(line.indexOf("}") + 1);
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Файл не найден");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
         return positions;
     }

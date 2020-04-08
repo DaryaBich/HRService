@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public boolean addEmployee(String FIO, int idDepartment, String phoneNumber, int seniority, int position) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int maxId = employees.size() + 1;
         Employee employee = new Employee(employees.size() + 1, FIO, idDepartment, phoneNumber, seniority, position);
         for (Employee emp : employees) {
@@ -25,22 +25,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         employee.setId(maxId + 1);
         employees.add(employee);
-        ApplicationContext.getDataAccessor().updateEmployees(employees);
+        ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
         return true;
     }
 
     @Override
     public void removeAll() {
-        ApplicationContext.getDataAccessor().updateEmployees(new ArrayList<>());
+        ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(new ArrayList<>());
     }
 
     @Override
     public boolean removeById( int id) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getId() == id);
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -49,11 +49,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByName(String Name) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getFIO().equals(Name));
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -62,11 +62,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByDepartmentId(int idDepartment) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdDepartment() == idDepartment);
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -75,11 +75,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByPhoneNumber(String phoneNumber) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getPhoneNumber().equals(phoneNumber));
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -88,11 +88,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeBySeniority(int seniority) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getSeniority() == seniority);
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -101,11 +101,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean removeByPositionId(int positionId) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         int count = employees.size();
         employees = removeEmployee(employees, (emp) -> emp.getIdPosition() == positionId);
         if (count != employees.size()) {
-            ApplicationContext.getDataAccessor().updateEmployees(employees);
+            ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employees);
             return true;
         } else {
             return false;
@@ -149,7 +149,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee showById(int id) {
-        List<Employee> employees = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         for (Employee emp : employees) {
             if (emp.getId() == id) {
                 return emp;
@@ -160,36 +160,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> showAll() {
-        return ApplicationContext.getDataAccessor().extractEmployees();
+        return ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
     }
 
     @Override
     public List<Employee> showByName(String FIO) {
-        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return removeEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getFIO().equals(FIO));
     }
 
     @Override
     public List<Employee> showByDepartment(int idDepartment) {
-        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return removeEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getIdDepartment() == idDepartment);
     }
 
     @Override
     public List<Employee> showByPhoneNumber(String phoneNumber) {
-        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return removeEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getPhoneNumber().equals(phoneNumber));
     }
 
     @Override
     public List<Employee> showBySeniority(int seniority) {
-        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return removeEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getSeniority() == seniority);
     }
 
     @Override
     public List<Employee> showByPositionId(int positionId) {
-        return removeEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return removeEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getIdPosition() == positionId);
     }
 
@@ -197,7 +197,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getId()).matches(template));
     }
 
@@ -206,7 +206,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByNameTemplate(String FIO) {
         String template = FIO.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getFIO().matches(template));
     }
 
@@ -214,7 +214,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByDepartmentTemplate(String idDepartment) {
         String template = idDepartment.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getIdDepartment()).matches(template));
     }
 
@@ -222,7 +222,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByPhoneNumberTemplate(String phoneNumber) {
         String template = phoneNumber.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> emp.getPhoneNumber().matches(template));
     }
 
@@ -230,7 +230,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showBySeniorityTemplate(String seniority) {
         String template = seniority.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getSeniority()).matches(template));
     }
 
@@ -238,7 +238,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> showByPositionIdTemplate(String positionId) {
         String template = positionId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showEmployee(ApplicationContext.getDataAccessor().extractEmployees(),
+        return showEmployee(ApplicationContext.INSTANCE.getDataAccessor().extractEmployees(),
                 (emp) -> String.valueOf(emp.getIdPosition()).matches(template));
     }
 
@@ -264,7 +264,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     private String updater(Predicate<Employee> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Employee> employeeList = ApplicationContext.getDataAccessor().extractEmployees();
+        List<Employee> employeeList = ApplicationContext.INSTANCE.getDataAccessor().extractEmployees();
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {
@@ -306,7 +306,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                     }
             }
         }
-        ApplicationContext.getDataAccessor().updateEmployees(employeeList);
+        ApplicationContext.INSTANCE.getDataAccessor().updateEmployees(employeeList);
         return "departments update";
     }
 

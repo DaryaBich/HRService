@@ -22,8 +22,8 @@ public class JsonUtilsDataUpdater {
                 fileWriter.write(gson.toJson(employee));
             }
            fileWriter.close();
-        }catch (IOException e){
-            System.out.println("Файл не найден");
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
     }
     public static void updateDepartments(List<Department> departments, String filepath) {
@@ -34,8 +34,8 @@ public class JsonUtilsDataUpdater {
                 fileWriter.write(gson.toJson(department));
             }
             fileWriter.close();
-        }catch (IOException e){
-            System.out.println("Файл не найден");
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
     }
     public static void updatePositions(List<Position> positions, String filepath) {
@@ -46,8 +46,8 @@ public class JsonUtilsDataUpdater {
                 fileWriter.write(gson.toJson(position));
             }
             fileWriter.close();
-        }catch (IOException e){
-            System.out.println("Файл не найден");
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

@@ -12,7 +12,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     // вводить
     public boolean addDepartment(String name, int chiefIdEmployee) {
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         Department department = new Department(departments.size() + 1, name, chiefIdEmployee);
         int maxId = departments.size() + 1;
         for (Department dep : departments) {
@@ -25,22 +25,22 @@ public class DepartmentDaoImpl implements DepartmentDao {
         }
         department.setId(maxId + 1);
         departments.add(department);
-        ApplicationContext.getDataAccessor().updateDepartments(departments);
+        ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(departments);
         return true;
     }
 
     @Override
     public void removeAll() {
-        ApplicationContext.getDataAccessor().updateDepartments(new ArrayList<>());
+        ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(new ArrayList<>());
     }
 
     @Override
     public boolean removeById(int id) {
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getId() == id);
         if (departments.size() != count) {
-            ApplicationContext.getDataAccessor().updateDepartments(departments);
+            ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -50,11 +50,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public boolean removeByName( String name) {
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getName().equals(name));
         if (departments.size() != count) {
-            ApplicationContext.getDataAccessor().updateDepartments(departments);
+            ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -63,11 +63,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public boolean removeByChiefId(int chiefId) {
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         int count = departments.size();
         departments = removeDepartment(departments, (dep) -> dep.getChiefId() == chiefId);
         if (departments.size() != count) {
-            ApplicationContext.getDataAccessor().updateDepartments(departments);
+            ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(departments);
             return true;
         } else {
             return false;
@@ -93,7 +93,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department showById(int id) {
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         for (Department dep : departments) {
             if (dep.getId() == id) {
                 return dep;
@@ -104,18 +104,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> showAll() {
-        return ApplicationContext.getDataAccessor().extractDepartments();
+        return ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
     }
 
     @Override
     public List<Department> showByName(String name) {
-        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
+        return showDepartment(ApplicationContext.INSTANCE.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getName().equals(name));
     }
 
     @Override
     public List<Department> showByChiefId(int chiefId) {
-        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
+        return showDepartment(ApplicationContext.INSTANCE.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getChiefId() == chiefId);
     }
 
@@ -123,7 +123,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByIdTemplate(String id) {
         String strId = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
+        return showDepartment(ApplicationContext.INSTANCE.getDataAccessor().extractDepartments(),
                 (dep) -> String.valueOf(dep.getId()).matches(strId));
     }
 
@@ -131,7 +131,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByNameTemplate(String name) {
         String argument = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
+        return showDepartment(ApplicationContext.INSTANCE.getDataAccessor().extractDepartments(),
                 (dep) -> dep.getName().matches(argument));
     }
 
@@ -139,7 +139,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public List<Department> showByChiefIdTemplate(String chiefId) {
         String strId = chiefId.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showDepartment(ApplicationContext.getDataAccessor().extractDepartments(),
+        return showDepartment(ApplicationContext.INSTANCE.getDataAccessor().extractDepartments(),
                 (dep) -> String.valueOf(dep.getChiefId()).matches(strId));
     }
 
@@ -164,7 +164,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
     private String updater(Predicate<Department> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Department> departments = ApplicationContext.getDataAccessor().extractDepartments();
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().extractDepartments();
         for (String str : arguments) {
             String[] fieldValue = str.split("/");
             switch (fieldValue[0]){
@@ -191,7 +191,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
                     }
             }
         }
-        ApplicationContext.getDataAccessor().updateDepartments(departments);
+        ApplicationContext.INSTANCE.getDataAccessor().updateDepartments(departments);
         return "departments обновлены";
     }
 

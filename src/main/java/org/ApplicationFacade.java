@@ -1,48 +1,37 @@
 package org;
 
 import org.controllers.Controller;
-import org.dao.*;
-import org.entities.Department;
-import org.entities.Employee;
-import org.entities.Position;
-import org.utils.XmlUtilsDataExtractor;
-import org.utils.XmlUtilsDataUpdater;
 import org.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Scanner;
 
 public class ApplicationFacade {
     private Controller controller = new Controller();
-    private View view = new View();
 
     public void startApplication(String... args) {
-       View.instruction(); // вывод инструкции
-        //start console
-//        String command = "show all employees";
-//        String result = controller.parse(command);
-//        System.out.println(String.format("result : %s",command));
-//        if (args.length>0){
-//            if (args[0].equals("console")){
-//                startConsoleApplication();
-//            }
-//            else if (args[0].equals("tests")){
-//                startAutoTests();
-//            }
-//        }
+        View.instruction(); // вывод инструкции
         startAutoTests();
+        Scanner input = new Scanner(System.in);
+        do {
+            View.inputData();
+            String command = input.nextLine();
+            if (command.equalsIgnoreCase("end")) {
+                break;
+            } else {
+                System.out.println(controller.parse(command));
+            }
+        } while (true);
     }
-    public void startConsoleApplication(){
 
-    }
-    public void startAutoTests(){
+    public void startAutoTests() {
         List<String> commands = new ArrayList<>();
 //        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
 //        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json";
 //        commands.add("add/employee/json/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
-  //      commands.add("add/department/name/HR/chiefId/2");
-   //     commands.add("add/position/name/middle/salary/48500.9");
+        //      commands.add("add/department/name/HR/chiefId/2");
+        //     commands.add("add/position/name/middle/salary/48500.9");
 
 //        commands.add("add/employee/xml/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
 //        commands.add("add from file/position/xml/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json");
@@ -54,8 +43,8 @@ public class ApplicationFacade {
 //        commands.add("show/position/json/all");
 //        commands.add("show/department/json/all");
 //
-       commands.add("show by template/employee/fio/В*");
-       commands.add("remove/department/id/3");
+        commands.add("show by template/employee/fio/В*");
+        commands.add("remove/department/id/3");
         commands.add("show/department/all");
 //        commands.add("remove/position/json/all");
 //        commands.add("update/position/xml/id/1");
@@ -73,7 +62,7 @@ public class ApplicationFacade {
 //        commands.add("show by template/employee/xml/idDepartment/1*");
 //        commands.add("add from file/department/xml/C:\\\\Users\\\\Darya\\\\Desktop\\\\Java\\\\HRApp\\\\departments.json");
 //        commands.add("update/employee/xml/idDepartment/1");
-        for (String s:commands ) {
+        for (String s : commands) {
             System.out.println(controller.parse(s));
         }
     }

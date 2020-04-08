@@ -38,7 +38,7 @@ public class XmlUtilsDataUpdater {
                     new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -75,7 +75,7 @@ public class XmlUtilsDataUpdater {
                     new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -108,7 +108,7 @@ public class XmlUtilsDataUpdater {
                     new StreamResult(new File(filepath));
             transformer.transform(source, file);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

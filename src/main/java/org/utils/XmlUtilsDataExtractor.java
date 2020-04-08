@@ -7,11 +7,6 @@ import org.entities.Position;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.*;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +27,7 @@ public class XmlUtilsDataExtractor {
             }
             return employees;
         } catch (Exception exc) {
-            return null;
+            throw new RuntimeException(exc);
         }
     }
 
@@ -66,7 +61,7 @@ public class XmlUtilsDataExtractor {
             }
             return departments;
         } catch (Exception exc) {
-            return null;
+            throw new RuntimeException(exc);
         }
     }
 
@@ -96,7 +91,7 @@ public class XmlUtilsDataExtractor {
             }
             return positions;
         } catch (Exception exc) {
-            return null;
+            throw new RuntimeException(exc);
         }
     }
 

@@ -13,7 +13,7 @@ public class PositionDaoImpl implements PositionDao {
 private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml";
     @Override
     public boolean addPosition(String name, double salary) {
-        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         int maxId = positions.size() + 1;
         Position position = new Position(positions.size() + 1, name, salary);
         for (Position pos : positions) {
@@ -26,22 +26,22 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
         }
         position.setId(maxId + 1);
         positions.add(position);
-        ApplicationContext.getDataAccessor().updatePositions(positions);
+        ApplicationContext.INSTANCE.getDataAccessor().updatePositions(positions);
         return true;
     }
 
     @Override
     public void removeAll() {
-        ApplicationContext.getDataAccessor().updatePositions(new ArrayList<>());
+        ApplicationContext.INSTANCE.getDataAccessor().updatePositions(new ArrayList<>());
     }
 
     @Override
     public boolean removeById(int id) {
-        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getId() == id);
         if (count != positions.size()) {
-            ApplicationContext.getDataAccessor().updatePositions(positions);
+            ApplicationContext.INSTANCE.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -50,11 +50,11 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
 
     @Override
     public boolean removeByName(String name) {
-        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getName().equals(name));
         if (count != positions.size()) {
-            ApplicationContext.getDataAccessor().updatePositions(positions);
+            ApplicationContext.INSTANCE.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -63,11 +63,11 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
 
     @Override
     public boolean removeBySalary(double salary) {
-        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         int count = positions.size();
         positions = removePosition(positions, (pos) -> pos.getSalary() == salary);
         if (count != positions.size()) {
-            ApplicationContext.getDataAccessor().updatePositions(positions);
+            ApplicationContext.INSTANCE.getDataAccessor().updatePositions(positions);
             return true;
         } else {
             return false;
@@ -96,7 +96,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
 
     @Override
     public Position showById(int id) {
-        List<Position> positions = ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         for (Position pos : positions) {
             if (pos.getId() == id) {
                 return pos;
@@ -107,18 +107,18 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
 
     @Override
     public List<Position> showAll() {
-        return ApplicationContext.getDataAccessor().extractPositions();
+        return ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
     }
 
     @Override
     public List<Position> showByName(String name) {
-        return removePosition(ApplicationContext.getDataAccessor().extractPositions(),
+        return removePosition(ApplicationContext.INSTANCE.getDataAccessor().extractPositions(),
                 (pos) -> pos.getName().equals(name));
     }
 
     @Override
     public List<Position> showBySalary(double salary) {
-        return removePosition(ApplicationContext.getDataAccessor().extractPositions(),
+        return removePosition(ApplicationContext.INSTANCE.getDataAccessor().extractPositions(),
                 (pos) -> pos.getSalary() == salary);
     }
 
@@ -126,7 +126,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     public List<Position> showByIdTemplate(String id) {
         String template = id.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
+        return showPosition(ApplicationContext.INSTANCE.getDataAccessor().extractPositions(),
                 (pos) -> String.valueOf(pos.getId()).matches(template));
     }
 
@@ -134,7 +134,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     public List<Position> showByNameTemplate(String name) {
         String template = name.replace("*", "[0-9a-zA-Zа-яА-Я_№ ]*")
                 .replace("?", "[0-9a-zA-Zа-яА-Я_№ ]?");
-        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
+        return showPosition(ApplicationContext.INSTANCE.getDataAccessor().extractPositions(),
                 (pos) -> pos.getName().matches(template));
     }
 
@@ -142,7 +142,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
     public List<Position> showBySalaryTemplate(String salary) {
         String template = salary.replace("*", "[0-9]*")
                 .replace("?", "[0-9]?");
-        return showPosition(ApplicationContext.getDataAccessor().extractPositions(),
+        return showPosition(ApplicationContext.INSTANCE.getDataAccessor().extractPositions(),
                 (pos) -> String.valueOf(pos.getSalary()).matches(template));
     }
 
@@ -168,7 +168,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
 
     private String updater(Predicate<Position> condition) {
         String[] arguments = View.inputUpdateArguments();
-        List<Position> positions =  ApplicationContext.getDataAccessor().extractPositions();
+        List<Position> positions =  ApplicationContext.INSTANCE.getDataAccessor().extractPositions();
         for (String str : arguments) {
             String[] fieldValue = str.split("=");
             switch (fieldValue[0]) {
@@ -187,7 +187,7 @@ private String filepath = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.xml
                     }
             }
         }
-        ApplicationContext.getDataAccessor().updatePositions(positions);
+        ApplicationContext.INSTANCE.getDataAccessor().updatePositions(positions);
         return "departments update";
     }
 

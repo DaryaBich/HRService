@@ -17,7 +17,8 @@ public class AddFromFileOperationController implements OperationTypeController {
     public String execute(String[] parseCommands, DepartmentDao departmentDao) {
         StringBuilder added = new StringBuilder("Added id: ");
         StringBuilder notAdded = new StringBuilder("Not added id: ");
-        List<Department> departments = ApplicationContext.getDataAccessor().getProperties().getProperty("suffix")
+        List<Department> departments = ApplicationContext.INSTANCE.getDataAccessor().getProperties()
+                .getProperty("suffix")
                 .equals("xml") ?
                 XmlUtilsDataExtractor.extractDepartments(parseCommands[2]) :
                 JsonUtilsDataExtractor.extractDepartments(parseCommands[2]);
@@ -35,7 +36,7 @@ public class AddFromFileOperationController implements OperationTypeController {
     public String execute(String[] parseCommands, EmployeeDao employeeDao) {
         StringBuilder added = new StringBuilder("Added id: ");
         StringBuilder notAdded = new StringBuilder("Not added id: ");
-        List<Employee> employees = ApplicationContext.getDataAccessor().getProperties().getProperty("suffix")
+        List<Employee> employees = ApplicationContext.INSTANCE.getDataAccessor().getProperties().getProperty("suffix")
                 .equals("xml") ?
                 XmlUtilsDataExtractor.extractEmployees(parseCommands[2]) :
                 JsonUtilsDataExtractor.extractEmployees(parseCommands[2]);
@@ -54,7 +55,7 @@ public class AddFromFileOperationController implements OperationTypeController {
     public String execute(String[] parseCommands, PositionDao positionDao) {
         StringBuilder added = new StringBuilder("Added id: ");
         StringBuilder notAdded = new StringBuilder("Not added id: ");
-        List<Position> positions = ApplicationContext.getDataAccessor().getProperties().getProperty("suffix")
+        List<Position> positions = ApplicationContext.INSTANCE.getDataAccessor().getProperties().getProperty("suffix")
                 .equals("xml") ?
                 XmlUtilsDataExtractor.extractPositions(parseCommands[2]) :
                 JsonUtilsDataExtractor.extractPositions(parseCommands[2]);
