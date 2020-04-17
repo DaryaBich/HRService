@@ -1,1 +1,6 @@
-{"id":2,"FIO":"Роман","idDepartment":2,"phoneNumber":"892799","seniority":4,"idPosition":3}
+{"id":1,"FIO":"Шведов Николай Александрович","idDepartment":3,"phoneNumber":"891799","seniority":15,"idPosition":5}
+{"id":2,"FIO":"Жданов Роман Владимирович","idDepartment":7,"phoneNumber":"123799","seniority":6,"idPosition":6}
+{"id":3,"FIO":"Юров Илья Константинович","idDepartment":6,"phoneNumber":"452799","seniority":3,"idPosition":2}
+{"id":4,"FIO":"Новиков Илья Максимович","idDepartment":1,"phoneNumber":"234799","seniority":2,"idPosition":2}
+{"id":5,"FIO":"Целовальников Андрей Кириллович","idDepartment":4,"phoneNumber":"892799","seniority":6,"idPosition":3}
+{"id":6,"FIO":"Милонова Дарья Николаевна","idDepartment":2,"phoneNumber":"432799","seniority":8,"idPosition":3}

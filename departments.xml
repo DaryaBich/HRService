@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <departments xmlns="C:\Users\Darya\Desktop\Java\HRApp\departments.xml">
     <department>
-        <id>4</id>
-        <name>this</name>
+        <id>1</id>
+        <name>Java Delelopers</name>
+        <chiefId>1</chiefId>
+    </department>
+    <department>
+        <id>2</id>
+        <name>QA</name>
+        <chiefId>2</chiefId>
+    </department>
+    <department>
+        <id>3</id>
+        <name>Android Developers</name>
         <chiefId>3</chiefId>
     </department>
     <department>
+        <id>4</id>
+        <name>IOS Developers</name>
+        <chiefId>4</chiefId>
+    </department>
+    <department>
         <id>5</id>
-        <name>HR</name>
-        <chiefId>2</chiefId>
+        <name>PHP Developers</name>
+        <chiefId>1</chiefId>
+    </department>
+    <department>
+        <id>6</id>
+        <name>Python Developers</name>
+        <chiefId>5</chiefId>
+    </department>
+    <department>
+        <id>7</id>
+        <name>System Analysis</name>
+        <chiefId>8</chiefId>
+    </department>
+    <department>
+        <id>8</id>
+        <name>PM</name>
+        <chiefId>6</chiefId>
+    </department>
+    <department>
+        <id>9</id>
+        <name>Accountanting</name>
+        <chiefId>7</chiefId>
     </department>
 </departments>

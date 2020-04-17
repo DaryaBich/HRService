@@ -1,27 +1,163 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <employees xmlns="C:\Users\Darya\Desktop\Java\HRApp\employees.xml">
     <employee>
-        <id>5</id>
-        <fio>Валя</fio>
+        <id>1</id>
+        <fio>Юрьев Максим Игоревич</fio>
         <idDepartment>1</idDepartment>
         <phoneNumber>678765</phoneNumber>
-        <seniority>1</seniority>
-        <idPosition>2</idPosition>
+        <seniority>10</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>2</id>
+        <fio>Железнов Роман Витальевич</fio>
+        <idDepartment>2</idDepartment>
+        <phoneNumber>892799</phoneNumber>
+        <seniority>2</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>3</id>
+        <fio>Малов Святослав Максимович</fio>
+        <idDepartment>3</idDepartment>
+        <phoneNumber>762799</phoneNumber>
+        <seniority>6</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>4</id>
+        <fio>Краснов Денис Архипович</fio>
+        <idDepartment>4</idDepartment>
+        <phoneNumber>762349</phoneNumber>
+        <seniority>8</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>5</id>
+        <fio>Малов Святослав Максимович</fio>
+        <idDepartment>5</idDepartment>
+        <phoneNumber>762710</phoneNumber>
+        <seniority>9</seniority>
+        <idPosition>1</idPosition>
     </employee>
     <employee>
         <id>6</id>
-        <fio>Роман</fio>
-        <idDepartment>2</idDepartment>
-        <phoneNumber>892799</phoneNumber>
-        <seniority>4</seniority>
-        <idPosition>3</idPosition>
+        <fio>Качалова Мария Витальевна</fio>
+        <idDepartment>8</idDepartment>
+        <phoneNumber>763799</phoneNumber>
+        <seniority>6</seniority>
+        <idPosition>1</idPosition>
     </employee>
     <employee>
         <id>7</id>
-        <fio>Святослав</fio>
-        <idDepartment>2</idDepartment>
-        <phoneNumber>762799</phoneNumber>
-        <seniority>6</seniority>
+        <fio>Живина Виталина Александровна</fio>
+        <idDepartment>9</idDepartment>
+        <phoneNumber>232799</phoneNumber>
+        <seniority>10</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>8</id>
+        <fio>Воронов Кирилл Алексеевич</fio>
+        <idDepartment>7</idDepartment>
+        <phoneNumber>712799</phoneNumber>
+        <seniority>7</seniority>
+        <idPosition>1</idPosition>
+    </employee>
+    <employee>
+        <id>9</id>
+        <fio>Новиков Илья Максимович</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>234799</phoneNumber>
+        <seniority>2</seniority>
+        <idPosition>2</idPosition>
+    </employee>
+    <employee>
+        <id>10</id>
+        <fio>Крылов Кирилл Геннадьевич</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>762439</phoneNumber>
+        <seniority>5</seniority>
         <idPosition>3</idPosition>
+    </employee>
+    <employee>
+        <id>11</id>
+        <fio>Краснова Ангелина Витальевна</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>762213</phoneNumber>
+        <seniority>11</seniority>
+        <idPosition>5</idPosition>
+    </employee>
+    <employee>
+        <id>12</id>
+        <fio>Загорелов Игорь Максимович</fio>
+        <idDepartment>1</idDepartment>
+        <phoneNumber>712799</phoneNumber>
+        <seniority>8</seniority>
+        <idPosition>4</idPosition>
+    </employee>
+    <employee>
+        <id>13</id>
+        <fio>Юров Илья Константинович</fio>
+        <idDepartment>6</idDepartment>
+        <phoneNumber>452799</phoneNumber>
+        <seniority>3</seniority>
+        <idPosition>2</idPosition>
+    </employee>
+    <employee>
+        <id>14</id>
+        <fio>Долотов Кирилл Игнатьевич</fio>
+        <idDepartment>6</idDepartment>
+        <phoneNumber>145799</phoneNumber>
+        <seniority>5</seniority>
+        <idPosition>3</idPosition>
+    </employee>
+    <employee>
+        <id>15</id>
+        <fio>Знойная Инга Романовна</fio>
+        <idDepartment>6</idDepartment>
+        <phoneNumber>765499</phoneNumber>
+        <seniority>8</seniority>
+        <idPosition>4</idPosition>
+    </employee>
+    <employee>
+        <id>16</id>
+        <fio>Укротов Роман Игоревич</fio>
+        <idDepartment>6</idDepartment>
+        <phoneNumber>798799</phoneNumber>
+        <seniority>11</seniority>
+        <idPosition>5</idPosition>
+    </employee>
+    <employee>
+        <id>17</id>
+        <fio>Жданов Роман Владимирович</fio>
+        <idDepartment>7</idDepartment>
+        <phoneNumber>123799</phoneNumber>
+        <seniority>6</seniority>
+        <idPosition>6</idPosition>
+    </employee>
+    <employee>
+        <id>18</id>
+        <fio>Курышев Денис Дмтриевич</fio>
+        <idDepartment>5</idDepartment>
+        <phoneNumber>762431</phoneNumber>
+        <seniority>3</seniority>
+        <idPosition>2</idPosition>
+    </employee>
+    <employee>
+        <id>19</id>
+        <fio>Заров Константин Владимирович</fio>
+        <idDepartment>4</idDepartment>
+        <phoneNumber>756799</phoneNumber>
+        <seniority>10</seniority>
+        <idPosition>5</idPosition>
+    </employee>
+    <employee>
+        <id>20</id>
+        <fio>Шведов Николай Александрович</fio>
+        <idDepartment>3</idDepartment>
+        <phoneNumber>891799</phoneNumber>
+        <seniority>15</seniority>
+        <idPosition>5</idPosition>
     </employee>
 </employees>

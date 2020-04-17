@@ -1,94 +1,31 @@
 package org.controllers;
 
-import org.dao.*;
+import org.controllers.departmentOperations.DepartmentAddOperationController;
+import org.controllers.employeeOperations.EmployeeAddOperationController;
+import org.controllers.positionOperations.PositionAddOperationController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddOperationController implements OperationTypeController {
-    // add/department/name/.../chiefId/...
+    private final Map<String, OperationTypeController> operationTypeControllerMap = createMap();
+
     @Override
-    public String execute(String[] parseCommands, DepartmentDao departmentDao) {
-        if (parseCommands.length != 6) {
-            return "\nНедостаточно аргументов";
+    public String execute(String[] parseCommands) {
+        if (operationTypeControllerMap.containsKey(parseCommands[1])){
+            return operationTypeControllerMap.get(parseCommands[1]).execute(parseCommands);
         }
-        String name = "", chiefId = "";
-        if (parseCommands[2].equalsIgnoreCase("name")) {
-            name = parseCommands[3];
-            chiefId = parseCommands[5];
-        } else {
-            name = parseCommands[5];
-            chiefId = parseCommands[3];
-        }
-        try {
-            if (departmentDao.addDepartment(name, Integer.parseInt(chiefId))) {
-                return "\nDepartment успешно добавлен";
-            } else {
-                return "\nDepartment уже существует";
-            }
-        } catch (NumberFormatException e) {
-            return "\nЗначение в неверном формате";
+        else{
+            return "\nТаблица " + parseCommands[1]+ " не существует";
         }
     }
 
-    @Override
-    public String execute(String[] parseCommands, EmployeeDao employeeDao) {
-        if (parseCommands.length != 12) {
-            return "\nНедостаточно аргументов";
-        }
-        String fio = "", idDeparment = "", phoneNumber = "", seniority = "", position = "";
-        for (int i = 2; i < parseCommands.length; i += 2) {
-            switch (parseCommands[i]) {
-                case "fio":
-                    fio = parseCommands[i + 1];
-                    break;
-                case "idDepartment":
-                    idDeparment = parseCommands[i + 1];
-                    break;
-                case "phoneNumber":
-                    phoneNumber = parseCommands[i + 1];
-                    break;
-                case "seniority":
-                    seniority = parseCommands[i + 1];
-                    break;
-                case "idPosition":
-                    position = parseCommands[i + 1];
-                    break;
-                default:
-                    return "\nПоле " + parseCommands[i] + " отсутствует";
-            }
-        }
-        try {
-            if (employeeDao.addEmployee(fio, Integer.parseInt(idDeparment), phoneNumber, Integer.parseInt(seniority),
-                    Integer.parseInt(position))) {
-                return "\nEmployee успешно добавлен";
-            } else {
-                return "\nEmployee уже существует";
-            }
-        } catch (NumberFormatException e) {
-            return "\nЗначение в неверном формате";
-        }
-    }
-
-    @Override
-    public String execute(String[] parseCommands, PositionDao positionDao) {
-        if (parseCommands.length != 6) {
-            return "\nНедостаточно аргументов";
-        }
-        String name = "", salary = "";
-        if (parseCommands[2].equalsIgnoreCase("name")) {
-            name = parseCommands[3];
-            salary = parseCommands[5];
-        } else {
-            name = parseCommands[5];
-            salary = parseCommands[3];
-        }
-        try {
-            if (positionDao.addPosition(name, Double.parseDouble(salary))) {
-                return "\nPosition успешно добавлен";
-            } else {
-                return "\nPosition уже существует";
-            }
-        } catch (NumberFormatException e) {
-            return "\nЗначение в неверном формате";
-        }
+    private Map<String, OperationTypeController> createMap() {
+        Map<String, OperationTypeController> operationTypeControllerMap = new HashMap<>();
+        operationTypeControllerMap.put("department", new DepartmentAddOperationController());
+        operationTypeControllerMap.put("employee", new EmployeeAddOperationController());
+        operationTypeControllerMap.put("position", new PositionAddOperationController());
+        return operationTypeControllerMap;
     }
 }
 

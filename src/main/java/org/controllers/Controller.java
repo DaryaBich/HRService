@@ -1,16 +1,12 @@
 package org.controllers;
 
 import org.dao.*;
-import org.entities.Department;
-import org.entities.Employee;
-import org.entities.Position;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Controller {
-    private Map<String, OperationTypeController> stringOperationTypeControllerMap = getControllersMap();
+    private final Map<String, OperationTypeController> stringOperationTypeControllerMap = getControllersMap();
     EmployeeDao employeeDao = new EmployeeDaoImpl();
     DepartmentDao departmentDao = new DepartmentDaoImpl();
     PositionDao positionDao = new PositionDaoImpl();
@@ -20,28 +16,18 @@ public class Controller {
 
     public String parse(String inputCommand) {
         String[] parseCommand = inputCommand.split("/");
-        if (parseCommand.length > 2) {
-            OperationTypeController operationTypeController = stringOperationTypeControllerMap.get(parseCommand[0]);
-            if (operationTypeController != null) {
-                String entity = parseCommand[1];
-                if (entity.equalsIgnoreCase("employee")) {
-                    return operationTypeController.execute(parseCommand, employeeDao);
-                } else if (entity.equalsIgnoreCase("department")) {
-                    return operationTypeController.execute(parseCommand, departmentDao);
-                } else if (entity.equalsIgnoreCase("position")) {
-                    return operationTypeController.execute(parseCommand, positionDao);
-                } else {
-                    return "\nТаблица " + entity + " не существует";
-                }
+        if (parseCommand.length > 0) {
+            if (stringOperationTypeControllerMap.containsKey(parseCommand[0])) {
+               return stringOperationTypeControllerMap.get(parseCommand[0]).execute(parseCommand);
             } else {
                 return "\nОтсутствует команда " + parseCommand[0];
             }
         } else {
-            return "\nНеверная команда";
+            return "\nСлишком короткая команда";
         }
     }
 
-    public static final Map<String, OperationTypeController> getControllersMap() {
+    public static Map<String, OperationTypeController> getControllersMap() {
         Map<String, OperationTypeController> stringOperationTypeControllerMap = new HashMap<>();
         stringOperationTypeControllerMap.put("show", new ShowOperationController());
         stringOperationTypeControllerMap.put("show by template", new ShowByTemplateOperationController());

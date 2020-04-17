@@ -2,17 +2,52 @@
 <positions xmlns="C:\Users\Darya\Desktop\Java\HRApp\positions.xml">
     <position>
         <id>1</id>
-        <name>Коля</name>
-        <salary>123.5</salary>
+        <name>Chief</name>
+        <salary>150000</salary>
     </position>
     <position>
         <id>2</id>
-        <name>middle</name>
-        <salary>70.8</salary>
+        <name>Junior</name>
+        <salary>40000</salary>
+    </position>
+    <position>
+        <id>3</id>
+        <name>Middle</name>
+        <salary>80000</salary>
+    </position>
+    <position>
+        <id>4</id>
+        <name>Senior</name>
+        <salary>100000</salary>
     </position>
     <position>
         <id>5</id>
-        <name>middle</name>
-        <salary>48500.9</salary>
+        <name>Architecture</name>
+        <salary>150000</salary>
+    </position>
+    <position>
+        <id>6</id>
+        <name>Manager</name>
+        <salary>50000</salary>
+    </position>
+    <position>
+        <id>7</id>
+        <name>Cleaner</name>
+        <salary>25000</salary>
+    </position>
+    <position>
+        <id>8</id>
+        <name>Secretary</name>
+        <salary>40000</salary>
+    </position>
+    <position>
+        <id>9</id>
+        <name>Courier</name>
+        <salary>20000</salary>
+    </position>
+    <position>
+        <id>10</id>
+        <name>Security</name>
+        <salary>30000</salary>
     </position>
 </positions>

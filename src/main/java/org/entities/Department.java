@@ -70,11 +70,5 @@ public class Department {
         return chiefId;
     }
 
-    public static String listDepartmentsToString(List<Department> departments){
-        StringBuilder sBDepartment = new StringBuilder();
-        for (Department dep : departments) {
-            sBDepartment.append(dep.toString());
-        }
-        return sBDepartment.toString();
-    }
+
 }

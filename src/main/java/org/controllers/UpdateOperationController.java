@@ -1,106 +1,31 @@
 package org.controllers;
 
-import org.dao.DepartmentDao;
-import org.dao.EmployeeDao;
-import org.dao.PositionDao;
+import org.controllers.departmentOperations.DepartmentUpdateOperationController;
+import org.controllers.employeeOperations.EmployeeUpdateOperationController;
+import org.controllers.positionOperations.PositionUpdateOperationController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateOperationController implements OperationTypeController {
 // update/department/id/3
+private final Map<String, OperationTypeController> operationTypeControllerMap = createMap();
+
     @Override
-    public String execute(String[] parseCommands, DepartmentDao departmentDao) {
-        if (parseCommands[2].equals("all")) {
-            return departmentDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
-                case "id":
-                    try {
-                        return departmentDao.updateID(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                case "name":
-                    return departmentDao.updateName(parseCommands[3]);
-                case "chiefId":
-                    try {
-                        return departmentDao.updateChiefId(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
-            }
-        } else {
-            return "\nНедостаточно/много аргументов";
+    public String execute(String[] parseCommands) {
+        if (operationTypeControllerMap.containsKey(parseCommands[1])){
+            return operationTypeControllerMap.get(parseCommands[1]).execute(parseCommands);
+        }
+        else{
+            return "\nТаблица " + parseCommands[1]+ " не существует";
         }
     }
 
-    @Override
-    public String execute(String[] parseCommands, EmployeeDao employeeDao) {
-        if (parseCommands[2].equals("all")) {
-            return employeeDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
-                case "id":
-                    try {
-                        return employeeDao.updateId(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                case "fio":
-                    return employeeDao.updateName(parseCommands[3]);
-                case "idDepartment":
-                    try {
-                        return employeeDao.updateDepartment(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                case "phoneNumber":
-                    return employeeDao.updatePhoneNumber(parseCommands[3]);
-                case "seniority":
-                    try {
-                        return employeeDao.updateSeniority(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                case "idPosition":
-                    try {
-                        return employeeDao.updatePositionId(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
-            }
-        } else {
-            return "\nНедостаточно/много аргументов";
-        }
-    }
-
-    @Override
-    public String execute(String[] parseCommands, PositionDao positionDao) {
-        if (parseCommands[2].equals("all")) {
-            return positionDao.updateAll();
-        } else if (parseCommands.length == 4) {
-            switch (parseCommands[2]) {
-                case "id":
-                    try {
-                        return positionDao.updateId(Integer.parseInt(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                case "name":
-                    return positionDao.updateName(parseCommands[3]);
-                case "salary":
-                    try {
-                        return positionDao.updateSalary(Double.parseDouble(parseCommands[3]));
-                    } catch (NumberFormatException e) {
-                        return "\nНеверное значение";
-                    }
-                default:
-                    return "\nПоле" + parseCommands[2] + " не существует";
-            }
-        } else {
-            return "\nНедостаточно/много аргументов";
-        }
+    private Map<String, OperationTypeController> createMap() {
+        Map<String, OperationTypeController> operationTypeControllerMap = new HashMap<>();
+        operationTypeControllerMap.put("department", new DepartmentUpdateOperationController());
+        operationTypeControllerMap.put("employee", new EmployeeUpdateOperationController());
+        operationTypeControllerMap.put("position", new PositionUpdateOperationController());
+        return operationTypeControllerMap;
     }
 }

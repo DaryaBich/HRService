@@ -110,12 +110,4 @@ public class Employee {
     public void setId(int id) {
         this.id = id;
     }
-    public static String listEmployeesToString(List<Employee> employees){
-        StringBuilder sBEmployee = new StringBuilder();
-        for (Employee empl:employees) {
-            sBEmployee.append(empl.toString());
-        }
-        return sBEmployee.toString();
-    }
-
 }
