@@ -27,41 +27,27 @@ public class ApplicationFacade {
 
     public void startAutoTests() {
         List<String> commands = new ArrayList<>();
-//        String filepathXml = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.xml";
-//        String filepathJson = "C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json";
-//        commands.add("add/employee/json/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
-        //      commands.add("add/department/name/HR/chiefId/2");
-        //     commands.add("add/position/name/middle/salary/48500.9");
-
-//        commands.add("add/employee/xml/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
-//        commands.add("add from file/position/xml/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json");
-//        commands.add("add from file/department/xml/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\department.json");
-//
         commands.add("show/position/all");
         commands.add("show/department/all");
-//
-//        commands.add("show/position/json/all");
-//        commands.add("show/department/json/all");
-//
-        commands.add("show by template/employee/fio/В*");
-        commands.add("remove/department/id/3");
-        commands.add("show/department/all");
-//        commands.add("remove/position/json/all");
-//        commands.add("update/position/xml/id/1");
-//        commands.add("update/department/xml/id/4");
-//
-//
-//        commands.add("add/employee/json/fio/Роман/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
-//        commands.add("add/employee/json/fio/Николай/idDepartment/2/phoneNumber/892779/seniority/4/idPosition/2");
-//
-//        commands.add("add/position/json/name/Dev/salary/23459.9");
-//        commands.add("add/department/json/name/devs/chiefId/2");
-//
-//        commands.add("show/employee/json/all");
-//        commands.add("show by template/employee/xml/fio/В*");
-//        commands.add("show by template/employee/xml/idDepartment/1*");
-//        commands.add("add from file/department/xml/C:\\\\Users\\\\Darya\\\\Desktop\\\\Java\\\\HRApp\\\\departments.json");
-//        commands.add("update/employee/xml/idDepartment/1");
+        commands.add("show/employee/all");
+
+        commands.add("add/employee/fio/Дюжин Роман Витальевич/idDepartment/2/phoneNumber/892799/seniority/4/idPosition/3");
+        commands.add("add/position/name/Helper/salary/23000");
+        commands.add("add/department/name/newDepartment/chiefId/16");
+
+        commands.add("show by template/employee/idPosition/*3");
+        commands.add("show by template/department/name/P*");
+
+        commands.add("remove/department/id/1");
+        commands.add("remove/employee/idDepartment/1");
+        commands.add("remove/position/id/2");
+
+        commands.add("update/position/id/1");
+        commands.add("update/department/id/4");
+        commands.add("update/employee/id/14");
+        commands.add("add from file/department/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\departments.json");
+        commands.add("add from file/employee/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\employees.json");
+        commands.add("add from file/position/C:\\Users\\Darya\\Desktop\\Java\\HRApp\\positions.json");
         for (String s : commands) {
             System.out.println(controller.parse(s));
         }

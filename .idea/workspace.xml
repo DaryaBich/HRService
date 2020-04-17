@@ -2,58 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8300cf9-5cf0-406d-89ca-bdf8ba708b03" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentAddFromFileOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentAddOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentRemoveOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentShowByTemplateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentShowOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/departmentOperations/DepartmentUpdateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeAddFromFileOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeAddOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeRemoveOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeShowByTemplateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeShowOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/employeeOperations/EmployeeUpdateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionAddFromFileOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionAddOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionRemoveOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionShowByTemplateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionShowOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/controllers/positionOperations/PositionUpdateOperationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/utils/EntityOperationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/departments.json" beforeDir="false" afterPath="$PROJECT_DIR$/departments.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/departments.xml" beforeDir="false" afterPath="$PROJECT_DIR$/departments.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employees.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employees.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/positions.json" beforeDir="false" afterPath="$PROJECT_DIR$/positions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/positions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/positions.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/ApplicationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddFromFileOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/AddOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/OperationTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/OperationTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/RemoveOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/RemoveOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/ShowByTemplateOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/ShowByTemplateOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/ShowOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/ShowOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/controllers/UpdateOperationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/controllers/UpdateOperationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/entities/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/HRService.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/ApplicationContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/ApplicationContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/AddFromFileOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/AddFromFileOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/AddOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/AddOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/OperationTypeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/OperationTypeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/RemoveOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/RemoveOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/ShowByTemplateOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/ShowByTemplateOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/ShowOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/ShowOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/controllers/UpdateOperationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/controllers/UpdateOperationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Department.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Department.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/entities/Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/entities/Position.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/ApplicationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/ApplicationFacade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +84,7 @@
       <workItem from="1586367030809" duration="2019000" />
       <workItem from="1586418923692" duration="53000" />
       <workItem from="1586940310752" duration="1297000" />
-      <workItem from="1587115065070" duration="7423000" />
+      <workItem from="1587115065070" duration="8500000" />
     </task>
     <task id="LOCAL-00001" summary="add controllerCommands">
       <created>1585317349177</created>
